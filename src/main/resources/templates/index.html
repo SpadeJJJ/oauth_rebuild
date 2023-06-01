@@ -1,0 +1,15 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>home</title>
+</head>
+<body>
+  <h2>html example</h2>
+
+  <p>네이버 로그인</p>
+  <a th:href="@{https://nid.naver.com/oauth2.0/authorize?response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}&state={state}
+              (response_type=${responseType}, client_id=${clientId}, redirect_uri=${redirectUri}, state=${state})}">로그인 하기</a>
+
+</body>
+</html>
+
