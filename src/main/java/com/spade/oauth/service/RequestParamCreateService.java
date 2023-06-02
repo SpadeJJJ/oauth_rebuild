@@ -1,14 +1,13 @@
 package com.spade.oauth.service;
 
-import com.spade.oauth.dto.model.ParamAccessToken;
-
-import java.util.Map;
+import com.spade.oauth.dto.model.param.ParamAccessToken;
+import com.spade.oauth.dto.model.param.StateInfoForParam;
 
 public interface RequestParamCreateService {
 
-    public ParamAccessToken createParamForAccessTokenCreate(String code, String responseState);
+    public ParamAccessToken createParamForAccessTokenCreate(StateInfoForParam token);
 
-    public ParamAccessToken createParamForAccessTokenUpdate();
+    public ParamAccessToken createParamForAccessTokenUpdate(StateInfoForParam token);
 
-    public ParamAccessToken createParamForAccessTokenDelete();
+    public ParamAccessToken createParamForAccessTokenDelete(StateInfoForParam token);
 }

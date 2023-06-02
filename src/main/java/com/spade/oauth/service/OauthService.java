@@ -1,9 +1,6 @@
 package com.spade.oauth.service;
 
-import com.google.gson.Gson;
-import com.spade.oauth.dto.model.ParamAccessToken;
-
-import java.util.Map;
+import com.spade.oauth.dto.model.param.ParamAccessToken;
 
 // 요청 ? 무슨 요청? 일단 인증 요청 겟이든 뭐든 받아야지? 일단 리퀘스트 어썬티 케이션 - 리턴 없음
 // 그 다음 뭐야? 인증 코드 인증 백 유알엘
@@ -12,9 +9,9 @@ public interface OauthService {
 
 //    String requestAuthorize(Map<String, Object> requestParams);
 
-    Gson requestAuthorizeTokenUpdate(ParamAccessToken param);
+    String requestAuthorizeTokenUpdate(ParamAccessToken param);
 
-    Gson requestAuthorizeTokenCreate(ParamAccessToken param);
+    String requestAuthorizeTokenCreate(ParamAccessToken param);
 
-    Gson requestAuthorizeTokenDelete(ParamAccessToken param);
+    String requestAuthorizeTokenDelete(ParamAccessToken param);
 }

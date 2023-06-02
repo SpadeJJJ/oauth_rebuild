@@ -1,4 +1,4 @@
-package com.spade.oauth.dto.naver;
+package com.spade.oauth.dto.model.param.naver;
 
 import lombok.Getter;
 

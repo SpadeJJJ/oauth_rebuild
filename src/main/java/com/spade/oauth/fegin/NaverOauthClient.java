@@ -1,15 +1,17 @@
 package com.spade.oauth.fegin;
 
-import com.google.gson.Gson;
-import com.spade.oauth.dto.model.ParamAccessToken;
+import com.spade.oauth.dto.model.param.ParamAccessToken;
+import com.spade.oauth.fegin.config.FeignConfig;
+import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.cloud.openfeign.SpringQueryMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(value = "a", url = "${oauth2.naver.login.authorize.host.url}")
+import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+@FeignClient(value = "a", url = "${oauth2.naver.login.authorize.host.url}", configuration = FeignConfig.class)
 public interface NaverOauthClient {
+
 
     // ?client_id={client_id}&client_secret={client_secret}&grant_type={grant_type}&state={state}&code={code}"
 //    @RequestLine("GET /token")
@@ -35,8 +37,20 @@ public interface NaverOauthClient {
 //                                  @RequestParam(value = "state") String state,
 //                                  @RequestParam(value = "code") String code);
 
-    @GetMapping("${oauth2.naver.login.authorize.token.url}")
-    String requestAccessTokenCreate(@SpringQueryMap ParamAccessToken token);
+//    @GetMapping("${oauth2.naver.login.authorize.token.url}")
+
+    @RequestMapping(value = "${oauth2.naver.login.authorize.token.url}", method = POST, consumes = APPLICATION_FORM_URLENCODED_VALUE)
+    @Headers("Content-Type: application/-www-form-urlencodexd;charset=utf-8")
+    String requestAccessTokenCreate(ParamAccessToken token);
+
+    @RequestMapping(value = "${oauth2.naver.login.authorize.token.url}", method = POST, consumes = APPLICATION_FORM_URLENCODED_VALUE)
+    @Headers("Content-Type: application/-www-form-urlencodexd;charset=utf-8")
+    String requestAccessTokenUpdate(ParamAccessToken token);
+
+    @RequestMapping(value = "${oauth2.naver.login.authorize.token.url}", method = POST, consumes = APPLICATION_FORM_URLENCODED_VALUE)
+    @Headers("Content-Type: application/-www-form-urlencodexd;charset=utf-8")
+    String requestAccessTokenDelete(ParamAccessToken token);
+
 
 //    @GetMapping("${oauth2.naver.authorize.request.accesstoken.url3}")
 //    Gson requestAccessTokenUpdate(@RequestParam(value = "grant_type") String grantType,
