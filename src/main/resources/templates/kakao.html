@@ -1,0 +1,15 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>home</title>
+</head>
+<body>
+  <h2>html example</h2>
+
+  <p>카카오 로그인 테스트</p>
+  <a th:href="@{https://kauth.kakao.com/oauth/authorize?response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}&state={state}
+              (response_type=${responseType}, client_id=${clientId}, redirect_uri=${redirectUri}, state=${state})}">인증 요청</a>
+
+</body>
+</html>
+
