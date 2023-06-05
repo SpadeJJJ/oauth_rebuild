@@ -6,13 +6,11 @@
 <body>
   <h2>html example</h2>
 
-  <p>네이버 로그인 테스트</p>
-  <a th:href="@{https://nid.naver.com/oauth2.0/authorize?response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}&state={state}
-              (response_type=${responseType}, client_id=${clientId}, redirect_uri=${redirectUri}, state=${state})}">인증 요청</a>
+  <p>로그인 테스트</p>
 
-  <a href="/token/update">토큰 갱신</a>
+  <a href="/naver">네이버</a>
 
-  <a href="/token/delte">토큰 삭제</a>
+  <a href="/kakao">카카오</a>
 
 </body>
 </html>

@@ -1,24 +1,18 @@
-package com.spade.oauth.redis.service;
+package com.spade.oauth.redis.service.kakao;
 
 import com.spade.oauth.domain.redis.OauthState;
-import com.spade.oauth.redis.RedisInfo;
 import com.spade.oauth.redis.repository.OauthStateRepository;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.Optional;
 
 @Service
-public class OauthStateService {
+public class RedisKakaoOauthStateService {
 
-    @Value("${oauth2.naver.clientid}")
+    @Value("${oauth2.kakao.clientid}")
     private String clientId;
-    @Value("${oauth2.naver.secretkey}")
-    private String secretKey;
 
     @Autowired
     OauthStateRepository oauthStateRepository;
@@ -39,8 +33,6 @@ public class OauthStateService {
 
         oauthStateRepository.save(oauthState);
     }
-
-
 
     public void deleteOauthState(Long id) {
         oauthStateRepository.deleteById(id);

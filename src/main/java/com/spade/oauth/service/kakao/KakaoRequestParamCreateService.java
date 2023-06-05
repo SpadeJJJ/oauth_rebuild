@@ -1,19 +1,16 @@
-package com.spade.oauth.service.naver;
+package com.spade.oauth.service.kakao;
 
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
 import com.spade.oauth.dto.model.param.ParamForStateInfo;
 import com.spade.oauth.service.RequestParamCreateService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NaverRequestParamCreateService implements RequestParamCreateService {
+public class KakaoRequestParamCreateService implements RequestParamCreateService {
 
-    @Value("${oauth2.naver.clientid}")
+    @Value("${oauth2.kakao.clientid}")
     private String clientId;
-    @Value("${oauth2.naver.secretkey}")
-    private String clientSecret;
 
     @Override
     public ParamForAccessToken createParamForAccessTokenCreate(ParamForStateInfo token) {
@@ -30,6 +27,5 @@ public class NaverRequestParamCreateService implements RequestParamCreateService
     @Override
     public void setCommonParam(ParamForAccessToken param) {
         param.setClientId(clientId);
-        param.setClientSecret(clientSecret);
     }
 }

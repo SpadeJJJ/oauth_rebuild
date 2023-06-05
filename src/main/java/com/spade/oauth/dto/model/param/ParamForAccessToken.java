@@ -7,7 +7,7 @@ import lombok.Setter;
 // @feign.form.FormProperty("response_type")
 @Setter
 @Getter
-public class ParamAccessToken {
+public class ParamForAccessToken {
     @FormProperty("client_id")
     private String clientId;
     @FormProperty("client_secret")
