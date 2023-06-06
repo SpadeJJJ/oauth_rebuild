@@ -11,9 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
-@Service(value = "naverOauthService")
+@Service(value = "naver")
 public class NaverOauthService implements OauthService {
 
     @Autowired
@@ -23,6 +24,11 @@ public class NaverOauthService implements OauthService {
     private RedisNaverOauthStateService redisNaverOauthStateService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Override
+    public OauthService from(String type) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        return null;
+    }
 
     @Override
     public String requestForAuthorizeTokenCreate(ParamForAccessToken param) {

@@ -6,11 +6,15 @@ import com.spade.oauth.util.OauthStateUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 테스트용
@@ -23,8 +27,13 @@ public class HomeController {
 
     private final RedisNaverOauthStateService redisNaverOauthStateService;
     private final RedisKakaoOauthStateService redisKakaoOauthStateService;
+    @Autowired
+    private Environment environment;
+
+
     @GetMapping("/")
     public String home(Model model, HttpSession session) {
+
         return "index";
     }
 
