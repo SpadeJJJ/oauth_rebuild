@@ -39,22 +39,22 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
+//    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation ('org.springframework.boot:spring-boot-starter-web') {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
-    implementation group: 'io.github.openfeign', name: 'feign-gson', version: '9.4.0'
-    implementation group: 'io.github.openfeign', name: 'feign-okhttp', version: '12.1'
-    implementation 'io.github.openfeign.form:feign-form:3.8.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'io.github.openfeign.form:feign-form:3.8.0'
+    implementation 'io.github.openfeign:feign-gson:9.4.0'
+    implementation 'io.github.openfeign:feign-okhttp:12.1'
+    implementation 'com.google.code.gson:gson:2.7'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-
 }
 
 tasks.named('test') {

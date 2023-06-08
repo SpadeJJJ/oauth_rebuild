@@ -2,20 +2,23 @@ package com.spade.oauth.redis.service.kakao;
 
 import com.spade.oauth.domain.redis.OauthState;
 import com.spade.oauth.redis.repository.OauthStateRepository;
+import com.spade.oauth.redis.service.RedisOauthStateService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
-public class RedisKakaoOauthStateService {
+@Service("kakaoRedisService")
+@AllArgsConstructor
+public class RedisKakaoOauthStateService implements RedisOauthStateService {
 
-    @Value("${oauth2.kakao.clientid}")
-    private String clientId;
+    private OauthStateRepository oauthStateRepository;
 
-    @Autowired
-    OauthStateRepository oauthStateRepository;
+//    public RedisKakaoOauthStateService(OauthStateRepository oauthStateRepository) {
+//        this.oauthStateRepository = oauthStateRepository;
+//    }
 
     public boolean checkState(String state) {
         Optional<OauthState> result = oauthStateRepository.findByState(state);

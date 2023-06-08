@@ -20,9 +20,14 @@ public class ParamForStateInfo {
 
     private String accessToken;
 
-    public static ParamForStateInfo toAutorize(String code) {
-        ParamForStateInfo result = new ParamForStateInfo();
-        result.setCode(code);
-        return result;
+    public ParamForStateInfo(String state, String code) {
+        this.state = state;
+        this.code = code;
     }
+
+//    public static ParamForStateInfo toAutorize(String code) {
+//        ParamForStateInfo result = new ParamForStateInfo();
+//        result.setCode(code);
+//        return result;
+//    }
 }

@@ -28,7 +28,7 @@ public class KakaoAuthorizeController {
     @Autowired
     RedisKakaoOauthStateService redisKakaoOauthStateService;
 
-    @GetMapping("${oauth2.kakao.authorize.callback.url}")
+//    @GetMapping("${oauth2.kakao.authorize.callback.url}")
     public String getKakaoAuthorizeRequestCallBack(ParamForCallBack response) {
         String result = "AuthorizeRequest fail";
 

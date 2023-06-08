@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,24 +22,25 @@ import java.util.List;
  * Oauth 요청 Controller
 * */
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class HomeController {
 
 
     private final RedisNaverOauthStateService redisNaverOauthStateService;
     private final RedisKakaoOauthStateService redisKakaoOauthStateService;
-    @Autowired
-    private Environment environment;
 
+    private final ApplicationContext applicationContext;
 
     @GetMapping("/")
     public String home(Model model, HttpSession session) {
-
+        for (String a : applicationContext.getBeanDefinitionNames()) {
+            System.out.println(a);
+        }
         return "index";
     }
 
-    /*@GetMapping("/naver")
-    public String naverTest(Model model, HttpSession session) {
+    @GetMapping("/naver")
+    public String naverTest(Model model) {
         String state = OauthStateUtil.createState();
 
         redisNaverOauthStateService.saveOauthState(state, "naver");
@@ -51,7 +53,7 @@ public class HomeController {
     }
 
     @GetMapping("/kakao")
-    public String kakaoTest(Model model, HttpSession session) {
+    public String kakaoTest(Model model) {
         String state = OauthStateUtil.createState();
 
         redisKakaoOauthStateService.saveOauthState(state, "kakao");
@@ -61,7 +63,7 @@ public class HomeController {
         model.addAttribute("redirectUri", "http://localhost:8080/kakao/callback");
 
         return "kakao";
-    }*/
+    }
     @GetMapping("/{authType}")
     public String oAuthTest(Model model, @PathVariable("authType") String authType) {
         String state = OauthStateUtil.createState();

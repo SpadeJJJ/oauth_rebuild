@@ -6,7 +6,7 @@ import com.spade.oauth.service.RequestParamCreateService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("kakaoParamService")
 public class KakaoRequestParamCreateService implements RequestParamCreateService {
 
     @Value("${oauth2.kakao.clientid}")

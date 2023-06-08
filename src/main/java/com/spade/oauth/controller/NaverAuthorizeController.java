@@ -32,7 +32,7 @@ public class NaverAuthorizeController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @GetMapping("${oauth2.naver.authorize.callback.url}")
+//    @GetMapping("${oauth2.naver.authorize.callback.url}")
     public String getNaverAuthorizeRequestCallBack(ParamForCallBack response) {
         String result = "AuthorizeRequest fail";
 

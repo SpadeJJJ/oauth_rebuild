@@ -15,16 +15,13 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
-@Service("kakao")
+@Service("kakaoService")
 public class KakaoOauthService implements OauthService {
 
-    @Autowired
     KakaoOauthClient kakaoOauthClient;
 
-    @Autowired
-    RedisKakaoOauthStateService redisKakaoOauthStateService;
-
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @Override
     public OauthService from(String type) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
@@ -37,24 +34,12 @@ public class KakaoOauthService implements OauthService {
     public String requestForAuthorizeTokenCreate(ParamForAccessToken param) {
         String result = null;
 
-        try {
-            result = kakaoOauthClient.requestAccessTokenCreate(param);
-            if(result == null) {
-                logger.warn("delete state fail");
-                throw new AuthorizeFailureException("kakao access token create fail");
-            }
-        } catch (AuthorizeFailureException e) {
-            logger.warn(e.getMessage());
-        } catch (Exception e) {
-            logger.warn(e.getMessage());
-        } finally {
-            Optional<OauthState> state = redisKakaoOauthStateService.findState(param.getState());
-            if(state.isPresent()) {
-                logger.info("kakao delete state in redis "+state.get().getId());
-                redisKakaoOauthStateService.deleteOauthState(state.get().getId());
-            }
-
+        result = kakaoOauthClient.requestAccessTokenCreate(param);
+        if(result == null) {
+            logger.warn("delete state fail");
+            throw new AuthorizeFailureException("kakao access token create fail");
         }
+
         return result;
     }
 }

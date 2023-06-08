@@ -1,48 +1,40 @@
 package com.spade.oauth.context;
 
-import com.google.gson.Gson;
-import com.spade.oauth.controller.TestController;
-import com.spade.oauth.dto.model.param.ParamForStateInfo;
 import com.spade.oauth.service.OauthService;
-import com.spade.oauth.service.kakao.KakaoOauthService;
-import com.spade.oauth.service.naver.NaverOauthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 @Component
 public class OAuthContextService implements InitializingBean {
     private final ApplicationContext context;
-    private  final  OAuthPathRepository oAuthPathRepository;
+    private final OAuthPathRepository oAuthPathRepository;
+
+    private final OAuthPathMapper oAuthPathMapper;
+
 
     //1. 패키지 + authName한 곳의 OAuthService 클래스를 구현한 클래스를 찾는다.
     //2. 1번의 클래스 기준으로 bean을 getBean하여 컴포넌트 자체를 반환하다.
 
     public OauthService findService(String authName){
-
-        String a = OAuthType.KAKAO.type;
-        OauthService service = (OauthService) context.getBean("kakao");
-        System.out.println(service.getClass().toString());
+//        String getG = oAuthPathMapper.match("/naver/callback");
+//        System.out.println("mapper "+getG);
+//        String a = OAuthType.KAKAO.type;
+//        OauthService service = (OauthService) context.getBean("kakao");
+//        System.out.println(service.getClass().toString());
 
         return null;
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        findService("d");
-        String get = oAuthPathRepository.test();
-        get = get.toUpperCase();
-        OAuthType a = OAuthType.valueOf(get);
-        System.out.println("this is type  "+a.type);
+//        findService("d");
+//        String get = oAuthPathRepository.test();
+//        get = get.toUpperCase();
+//        OAuthType a = OAuthType.valueOf(get);
+//        System.out.println("this is type  "+a.type);
 
         // 팀장님 1
 //        OauthService oauthService = context.getBean();
