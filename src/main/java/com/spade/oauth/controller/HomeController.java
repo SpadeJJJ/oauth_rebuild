@@ -3,6 +3,7 @@ package com.spade.oauth.controller;
 import com.spade.oauth.redis.service.kakao.RedisKakaoOauthStateService;
 import com.spade.oauth.redis.service.naver.RedisNaverOauthStateService;
 import com.spade.oauth.util.OauthStateUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,61 +26,9 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-
-    private final RedisNaverOauthStateService redisNaverOauthStateService;
-    private final RedisKakaoOauthStateService redisKakaoOauthStateService;
-
-    private final ApplicationContext applicationContext;
-
-    @GetMapping("/")
-    public String home(Model model, HttpSession session) {
-        for (String a : applicationContext.getBeanDefinitionNames()) {
-            System.out.println(a);
-        }
-        return "index";
+    @GetMapping("${oauth2.authorize.redirect.url}")
+    public String home(HttpServletResponse response) {
+        String result = response.getHeader("result");
+        return result;
     }
-
-    @GetMapping("/naver")
-    public String naverTest(Model model) {
-        String state = OauthStateUtil.createState();
-
-        redisNaverOauthStateService.saveOauthState(state, "naver");
-        model.addAttribute("responseType", "code");
-        model.addAttribute("state", state);
-        model.addAttribute("clientId", "UMKT4dIs6FAj23xkYaC1");
-        model.addAttribute("redirectUri", "http://localhost:8080/naver/callback");
-
-        return "naver";
-    }
-
-    @GetMapping("/kakao")
-    public String kakaoTest(Model model) {
-        String state = OauthStateUtil.createState();
-
-        redisKakaoOauthStateService.saveOauthState(state, "kakao");
-        model.addAttribute("responseType", "code");
-        model.addAttribute("state", state);
-        model.addAttribute("clientId", "a6c11d53fee9fbb93f86842dd20f0848");
-        model.addAttribute("redirectUri", "http://localhost:8080/kakao/callback");
-
-        return "kakao";
-    }
-    @GetMapping("/{authType}")
-    public String oAuthTest(Model model, @PathVariable("authType") String authType) {
-        String state = OauthStateUtil.createState();
-
-     /*
-     팀장님 코드
-     AuthType authType = AuthType.fromString(authType);
-        redisOAuthStateService.saveOauthState(state, authType);*/
-
-        redisNaverOauthStateService.saveOauthState(state, "naver");
-        model.addAttribute("responseType", "code");
-        model.addAttribute("state", state);
-        model.addAttribute("clientId", "UMKT4dIs6FAj23xkYaC1");
-        model.addAttribute("redirectUri", "http://localhost:8080/naver/callback");
-
-        return "naver";
-    }
-
 }

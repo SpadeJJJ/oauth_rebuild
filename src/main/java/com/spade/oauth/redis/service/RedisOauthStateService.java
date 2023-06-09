@@ -8,7 +8,6 @@ public interface RedisOauthStateService {
     public boolean checkState(String state);
 
     public Optional<OauthState> findState(String state);
-    public void saveOauthState(String state, String type);
 
     public void deleteOauthState(Long id);
 }

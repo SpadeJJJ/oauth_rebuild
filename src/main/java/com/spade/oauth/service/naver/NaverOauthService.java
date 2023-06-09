@@ -17,14 +17,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 @Service("naverService")
+@RequiredArgsConstructor
 public class NaverOauthService implements OauthService {
 
-    private NaverOauthClient naverOauthClient;
-
-    @Override
-    public OauthService from(String type) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        return null;
-    }
+    private final NaverOauthClient naverOauthClient;
 
     @Override
     public String requestForAuthorizeTokenCreate(ParamForAccessToken param) {
@@ -34,7 +30,6 @@ public class NaverOauthService implements OauthService {
         if(result == null) {
             throw new AuthorizeFailureException("naver access token create fail");
         }
-
 
         return result;
     }

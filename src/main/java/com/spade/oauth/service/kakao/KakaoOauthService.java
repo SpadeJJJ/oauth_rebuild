@@ -7,6 +7,7 @@ import com.spade.oauth.fegin.client.KakaoOauthClient;
 import com.spade.oauth.redis.service.kakao.RedisKakaoOauthStateService;
 import com.spade.oauth.service.OauthService;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +17,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 @Service("kakaoService")
+@RequiredArgsConstructor
 public class KakaoOauthService implements OauthService {
 
-    KakaoOauthClient kakaoOauthClient;
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
-    @Override
-    public OauthService from(String type) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-//  팀장님 코드
-        //        return OAuthServiceManager.KAKAO.getService().getDeclaredConstructor().newInstance();
-        return null;
-    }
+    private final KakaoOauthClient kakaoOauthClient;
 
     @Override
     public String requestForAuthorizeTokenCreate(ParamForAccessToken param) {
@@ -36,7 +28,6 @@ public class KakaoOauthService implements OauthService {
 
         result = kakaoOauthClient.requestAccessTokenCreate(param);
         if(result == null) {
-            logger.warn("delete state fail");
             throw new AuthorizeFailureException("kakao access token create fail");
         }
 

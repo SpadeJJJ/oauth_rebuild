@@ -1,6 +1,7 @@
 package com.spade.oauth.service;
 
 import com.spade.oauth.context.OAuthType;
+import com.spade.oauth.context.StateContext;
 import com.spade.oauth.domain.redis.OauthState;
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
 import com.spade.oauth.dto.model.param.ParamForCallBack;
@@ -16,7 +17,9 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class OAuthTokenService {
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
+
+    private final StateContext stateContext;
 
     public String requestToken(OAuthType oAuthType, ParamForCallBack param) {
         String serviceName = oAuthType.type + "Service";
@@ -28,11 +31,12 @@ public class OAuthTokenService {
         RedisOauthStateService redisOauthStateService = (RedisOauthStateService) applicationContext.getBean(redisServiceName);
         RequestParamCreateService paramService = (RequestParamCreateService) applicationContext.getBean(paramServiceName);
 
-        System.out.println("state check "+param.getState() +redisOauthStateService.checkState(param.getState()));
-
-//        if(!redisOauthStateService.checkState(param.getState())) {
-//            return "token request fail. not equals state";
-//        }
+        if (stateContext.checkUsingState()) {
+            System.out.println("state service true");
+            if (!redisOauthStateService.checkState(param.getState())) {
+                return "token request fail. not equals state";
+            }
+        }
 
         try {
             ParamForAccessToken token = paramService.createParamForAccessTokenCreate(new ParamForStateInfo(param.getState(), param.getCode()));
@@ -48,9 +52,6 @@ public class OAuthTokenService {
             }
         }
 
-
         return  result;
     }
-
-
 }
