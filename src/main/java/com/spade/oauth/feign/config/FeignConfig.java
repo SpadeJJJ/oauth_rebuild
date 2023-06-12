@@ -1,4 +1,4 @@
-package com.spade.oauth.fegin.config;
+package com.spade.oauth.feign.config;
 
 import feign.codec.Encoder;
 import org.springframework.context.annotation.Bean;

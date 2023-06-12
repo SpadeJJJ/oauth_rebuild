@@ -1,25 +1,36 @@
 package com.spade.oauth.context;
 
-import com.spade.oauth.domain.redis.OauthState;
-import com.spade.oauth.redis.repository.OauthStateRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class StateContext {
 
     private boolean STATE_USE_YN = true;
 
-    public void setStateUseYn(boolean useYn) {
+    private Map<String, String> stateMap = new HashMap<>();
+
+    public void setStateUse(boolean useYn) {
         this.STATE_USE_YN = useYn;
     }
 
-    public boolean checkUsingState() {
+    public boolean checkStateUse() {
         return this.STATE_USE_YN;
+    }
+
+    public boolean checkState(String state) {
+        return stateMap.containsKey(state) ? true : false;
+    }
+
+    public void deleteState(String state) {
+        stateMap.remove(state);
+    }
+
+    public void setState(String state, String type) {
+        stateMap.put(state, type);
     }
 }

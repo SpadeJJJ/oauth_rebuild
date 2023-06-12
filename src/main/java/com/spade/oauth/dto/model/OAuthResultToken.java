@@ -18,18 +18,4 @@ public class OAuthResultToken {
     private String callbackUrl;
 
     private String param;
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Request Result :");
-        sb.append(result);
-        sb.append(",");
-        sb.append("url : ");
-        sb.append(callbackUrl);
-        sb.append(",");
-        sb.append("param : ");
-        sb.append(param);
-        return sb.toString();
-    }
-
 }

@@ -1,2 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.spade.oauth.config.AutoConfig
+com.spade.oauth.config.OAuthAutoConfiguration,\
+com.spade.oauth.config.RedisAutoConfigurationCustom,\
+com.spade.oauth.config.RedisRepositoriesAutoConfigurationCustom,\
+com.spade.oauth.config.RedisServiceAutoConfiguration,\
+com.spade.oauth.config.StateAutoConfiguration,\
+com.spade.oauth.config.FilterAutoConfiguration,\
+com.spade.oauth.config.ParamServiceAutoConfiguration

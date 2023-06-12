@@ -2,24 +2,34 @@ package com.spade.oauth.service;
 
 import com.spade.oauth.context.OAuthType;
 import com.spade.oauth.context.StateContext;
-import com.spade.oauth.domain.redis.OauthState;
+import com.spade.oauth.domain.redis.OAuthState;
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
 import com.spade.oauth.dto.model.param.ParamForCallBack;
 import com.spade.oauth.dto.model.param.ParamForStateInfo;
 import com.spade.oauth.exception.AuthorizeFailureException;
-import com.spade.oauth.redis.service.RedisOauthStateService;
-import lombok.AllArgsConstructor;
+import com.spade.oauth.redis.service.RedisOAuthStateService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OAuthTokenService {
     private final ApplicationContext applicationContext;
 
     private final StateContext stateContext;
+
+    @Value("${spring.data.redis.repositories.enabled}")
+    private boolean redisUse = true;
+
+//    private boolean redisUseYn;
+
+    public boolean getUse() {
+        return this.redisUse;
+    }
 
     public String requestToken(OAuthType oAuthType, ParamForCallBack param) {
         String serviceName = oAuthType.type + "Service";
@@ -27,14 +37,22 @@ public class OAuthTokenService {
         String redisServiceName = oAuthType.type+"RedisService";
         String result = "";
 
-        OauthService service = (OauthService)applicationContext.getBean(serviceName);
-        RedisOauthStateService redisOauthStateService = (RedisOauthStateService) applicationContext.getBean(redisServiceName);
+        OAuthService service = (OAuthService)applicationContext.getBean(serviceName);
+
         RequestParamCreateService paramService = (RequestParamCreateService) applicationContext.getBean(paramServiceName);
 
-        if (stateContext.checkUsingState()) {
-            System.out.println("state service true");
-            if (!redisOauthStateService.checkState(param.getState())) {
-                return "token request fail. not equals state";
+        if (stateContext.checkStateUse()) {
+            if (redisUse) {
+                System.out.println("use redis");
+                RedisOAuthStateService redisOauthStateService = (RedisOAuthStateService) applicationContext.getBean(redisServiceName);
+                if (!redisOauthStateService.checkState(param.getState())) {
+                    return "token request fail. not equals state";
+                }
+            } else {
+                System.out.println("not use redis");
+                if(!stateContext.checkState(param.getState())) {
+                    return "token request fail. not equals state";
+                }
             }
         }
 
@@ -46,10 +64,18 @@ public class OAuthTokenService {
         } catch (Exception e) {
             return e.getMessage();
         } finally {
-            Optional<OauthState> state = redisOauthStateService.findState(param.getState());
-            if(state.isPresent()) {
-                redisOauthStateService.deleteOauthState(state.get().getId());
+            if(redisUse) {
+                RedisOAuthStateService redisOauthStateService = (RedisOAuthStateService) applicationContext.getBean(redisServiceName);
+                Optional<OAuthState> state = redisOauthStateService.findState(param.getState());
+                if(state.isPresent()) {
+                    redisOauthStateService.deleteOauthState(state.get().getId());
+                }
             }
+
+            if(stateContext.checkState(param.getState())) {
+                stateContext.deleteState(param.getState());
+            }
+
         }
 
         return  result;

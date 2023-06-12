@@ -1,24 +1,37 @@
 package com.spade.oauth.redis.service;
 
 import com.spade.oauth.context.StateContext;
-import com.spade.oauth.domain.redis.OauthState;
-import com.spade.oauth.redis.repository.OauthStateRepository;
-import lombok.RequiredArgsConstructor;
+import com.spade.oauth.domain.redis.OAuthState;
+import com.spade.oauth.redis.repository.OAuthStateRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
+@ConditionalOnProperty(prefix = "spring.data.redis.repositories", name = "enabled", havingValue = "true",
+        matchIfMissing = true)
 public class StateUtilService {
 
-    private final OauthStateRepository oauthStateRepository;
+    private OAuthStateRepository oauthStateRepository;
 
     private final StateContext stateContext;
 
+    @Autowired(required = false)
+    public StateUtilService(OAuthStateRepository oauthStateRepository, StateContext stateContext) {
+        this.oauthStateRepository = oauthStateRepository;
+        this.stateContext = stateContext;
+    }
+
+    public StateUtilService(StateContext stateContext) {
+        this.stateContext = stateContext;
+    }
+
     public String createStateForOAuth(String type) {
-        if (!stateContext.checkUsingState()) {
+        if (!stateContext.checkStateUse()) {
             return "state is not used";
         }
 
@@ -30,7 +43,7 @@ public class StateUtilService {
     }
 
     public void save(String createdState, String type) {
-        OauthState state = new OauthState();
+        OAuthState state = new OAuthState();
         state.setState(createdState);
         state.setType(type);
 
