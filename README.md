@@ -14,8 +14,8 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 
 ```mermaid
 graph LR
-A[Hard edge] -->B(Round edge)
-    B --> C{Decision}
-    C -->|One| D[Result one]
-    C -->|Two| E[Result two]
+
+A(FE) --> B(BF)
+C(BF) --> B(BF)
+
 ```
