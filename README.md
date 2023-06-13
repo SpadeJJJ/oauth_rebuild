@@ -20,8 +20,4 @@ TS --> LB : redirect-url로 CallBack 처리
 LB --> TS : CallBack의 인증 code로 TS에 인증 토큰 요청
 TS --> LB : 인증 토큰 전달
 LB -> BE : Event Publisher를 통해 LB를 사용하고 있는 프로젝트에 인증 토큰 전달
-
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
 ```
