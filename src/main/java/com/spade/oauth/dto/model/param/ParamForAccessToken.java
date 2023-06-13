@@ -4,7 +4,9 @@ import feign.form.FormProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-// @feign.form.FormProperty("response_type")
+/**
+ * OAuth 로그인 요청 시에 필요한 파라미터 정보 토큰
+ */
 @Setter
 @Getter
 public class ParamForAccessToken {

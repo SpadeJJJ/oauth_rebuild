@@ -4,8 +4,12 @@ import com.spade.oauth.dto.model.OAuthResultToken;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * OAuth 인증 요청 결과 Listener 구현 인터페이스
+ */
+
 @Component
-public class OAuthResultEventHandlerImpl implements OAuthResultEventHandler{
+public class OAuthResultEventHandlerImpl implements OAuthResultEventHandler {
     @Override
     @EventListener
     public void takeResult(OAuthResultToken token) {

@@ -1,12 +1,14 @@
 package com.spade.oauth.service.naver;
 
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
-import com.spade.oauth.dto.model.param.ParamForStateInfo;
+import com.spade.oauth.dto.model.param.ParamForOAuthAuthorizeRequest;
 import com.spade.oauth.service.RequestParamCreateService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * OAuth 토큰 Request(feign) Naver 요청에 필요한 파라미터 토큰 생성 서비스
+ */
 @Service("naverParamService")
 public class NaverRequestParamCreateService implements RequestParamCreateService {
 
@@ -16,7 +18,7 @@ public class NaverRequestParamCreateService implements RequestParamCreateService
     private String clientSecret;
 
     @Override
-    public ParamForAccessToken createParamForAccessTokenCreate(ParamForStateInfo token) {
+    public ParamForAccessToken createParamForAccessTokenCreate(ParamForOAuthAuthorizeRequest token) {
         ParamForAccessToken param = new ParamForAccessToken();
 
         setCommonParam(param);

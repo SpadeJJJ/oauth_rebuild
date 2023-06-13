@@ -6,6 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
+/**
+ * Redis에 저장할 State Domain
+ */
 @RedisHash("oauthState")
 @Getter
 @Setter

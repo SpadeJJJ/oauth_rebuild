@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * State 관리용 Context.
+ *
+ * 1. State 사용 여부 관리
+ * 2. State 사용 및 Redis 미사용시 Map으로 State 관리.
+ */
 @Component
 @RequiredArgsConstructor
 public class StateContext {

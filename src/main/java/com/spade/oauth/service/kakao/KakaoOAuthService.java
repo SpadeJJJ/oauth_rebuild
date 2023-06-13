@@ -8,6 +8,9 @@ import com.spade.oauth.service.OAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * OAuth 토큰 Request(feign) Kakao 구현체
+ */
 @Service("kakaoService")
 @RequiredArgsConstructor
 public class KakaoOAuthService implements OAuthService {

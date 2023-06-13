@@ -2,6 +2,9 @@ package com.spade.oauth.context;
 
 import com.spade.oauth.dto.model.param.ParamForCallBack;
 
+/**
+ * OAuth 타입(기업)
+ */
 public enum OAuthType {
     NAVER("naver", "naverService"), KAKAO("kakao", "kakaoService");
 

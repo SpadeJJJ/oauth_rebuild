@@ -20,7 +20,9 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
-//@Configuration
+/**
+ * Spring 자동 설정 - OAuth
+ */
 @ConditionalOnProperty(name = "oauth", havingValue = "on")
 @AutoConfiguration(after = StateAutoConfiguration.class)
 @RequiredArgsConstructor

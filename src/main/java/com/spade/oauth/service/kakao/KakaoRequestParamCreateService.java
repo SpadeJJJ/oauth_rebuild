@@ -1,10 +1,14 @@
 package com.spade.oauth.service.kakao;
 
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
-import com.spade.oauth.dto.model.param.ParamForStateInfo;
+import com.spade.oauth.dto.model.param.ParamForOAuthAuthorizeRequest;
 import com.spade.oauth.service.RequestParamCreateService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+/**
+ * OAuth 토큰 Request(feign) Kakao 요청에 필요한 파리미터 토큰 생성 서비스
+ */
 
 @Service("kakaoParamService")
 public class KakaoRequestParamCreateService implements RequestParamCreateService {
@@ -13,7 +17,7 @@ public class KakaoRequestParamCreateService implements RequestParamCreateService
     private String clientId;
 
     @Override
-    public ParamForAccessToken createParamForAccessTokenCreate(ParamForStateInfo token) {
+    public ParamForAccessToken createParamForAccessTokenCreate(ParamForOAuthAuthorizeRequest token) {
         ParamForAccessToken param = new ParamForAccessToken();
 
         setCommonParam(param);

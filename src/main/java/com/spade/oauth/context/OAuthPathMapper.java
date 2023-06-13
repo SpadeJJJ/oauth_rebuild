@@ -13,19 +13,25 @@ import org.springframework.util.AntPathMatcher;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * CallBack url Mather.
+ *
+ * todo.
+ * 변경 예정
+ */
 @Component
 @AllArgsConstructor
 public class OAuthPathMapper {
 
     private OAuthPathRepository oAuthPathRepository;
 
-    public String match(String requestPath) {
+    public String match(String requestUrl) {
         AntPathMatcher antPathMatcher = new AntPathMatcher();
 
         String result = "empty";
 
         for(String path : oAuthPathRepository.getOAuthPaths()) {
-            if (antPathMatcher.match(path, requestPath)) {
+            if (antPathMatcher.match(path, requestUrl)) {
                 result = path.split("/")[1];
                 break;
             }

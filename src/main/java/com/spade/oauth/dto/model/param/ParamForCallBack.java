@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * OAuth 인증 CallBack 관련 파라미터 정보 토큰
+ */
 @Getter
 @Setter
 public class ParamForCallBack {

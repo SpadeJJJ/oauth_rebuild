@@ -7,6 +7,9 @@ import com.spade.oauth.service.OAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * OAuth 토큰 Request(feign) Naver 구현체
+ */
 @Service("naverService")
 @RequiredArgsConstructor
 public class NaverOAuthService implements OAuthService {

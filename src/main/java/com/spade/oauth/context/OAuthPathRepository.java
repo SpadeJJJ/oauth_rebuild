@@ -9,6 +9,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * CallBack url 관리용 Repository
+ *
+ * todo.
+ * 변경 예정
+ */
 @Component
 @RequiredArgsConstructor
 public class OAuthPathRepository {
