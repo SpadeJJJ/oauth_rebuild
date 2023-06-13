@@ -30,7 +30,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
-@EnableConfigurationProperties(TestComponent.class)
 public class TestController {
 
     @Autowired
@@ -45,6 +44,9 @@ public class TestController {
     @Autowired
     private TestComponent testComponent;
 
+//    @Autowired
+//    private TestDTo testDTo;
+
     @Autowired
     Environment environment;
 
@@ -58,8 +60,10 @@ public class TestController {
 //                System.out.println(a);
 //            }
 
-            System.out.println(testComponent.getPref().keySet());
+            System.out.println(testComponent.toString());
 
+//            System.out.println(testComponent.getTest1());
+//            System.out.println(testDTo.getTest1());
             Pattern pattern = Pattern.compile("oauth2.[.+].authorize.callback.url");
             Matcher matcher = pattern.matcher("naver");
             System.out.println(environment.getRequiredProperty("naver"));
