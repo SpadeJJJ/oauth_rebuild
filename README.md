@@ -16,6 +16,8 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 * TS : Target Server (kakao, naver 등)
 * TE : Template Engine (jsp, thymeleaf 등)
 
+***
+
 ### 1. FE와 BE가 따로 있는 경우
 ```mermaid
 sequenceDiagram
@@ -41,6 +43,8 @@ TS ->> LB : 결과(인증 토큰) 전달
 LB ->> BE : Publisher를 통해 LB를 사용하고 있는 프로젝트에 인증 토큰 전달
 ```
 이 경우에 State는 LB의 redis를 통해 관리
+
+***
 
 ## library 요약
 * library 흐름
