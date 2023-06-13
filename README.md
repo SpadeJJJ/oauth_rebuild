@@ -6,9 +6,9 @@ Oauth2 인증 libarary 개발
 
 ## 순서
 
-L : library
-B : Backend
-T : Target Server(kakao, naver 등)
+* L : library
+* B : Backend
+* T : Target Server(kakao, naver 등)
 
 ```mermaid
 graph LR
