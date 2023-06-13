@@ -49,4 +49,20 @@ LB ->> BE : Publisher를 통해 LB를 사용하고 있는 프로젝트에 인증
     3. Filter에서 url에 따라 기관을 분류하고, 기관별 인증 로직을 수행함.
     4. 수행한 결과(인증 토큰)를 Event Publisher <--> Event Listener를 통해 전달
 
+## library 설정 파일 - application.properties
+* 서버 설정 정보
+    1. host.url=localhost:8080
+
+* 기관 설정 정보
+    1. [기업 redirect-url] oauth2.{기업명}.authorize.callback.url=/naver/callback
+    2. [기업 host] oauth2.{기업명}.authorize.host.url=https://nid.naver.com/oauth2.0
+    3. [기업 인증 요청 url] oauth2.{기업명}.login.authorize.token.url=/token
+    4. [기업 client-id] oauth2.{기업명}.clientid=UMKT4dIs6FAj23xkYaC1
+    5. [기업 secret-key] oauth2.{기업명}.secretkey=fwBz2BIrLy
+
+* redis
+    1. [Redis host] spring.cache.redis.host=localhost 
+    2. [Redis port] spring.cache.redis.port=6379
+    3. [Redis 사용여부] spring.data.redis.repositories.enabled=true  - 수정 예정.
+
 
