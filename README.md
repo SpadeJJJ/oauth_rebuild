@@ -1,16 +1,18 @@
-## OAuth2 인증 library
+### OAuth2 인증 library
 ***
 
 Oauth2 인증 libarary 개발
 
+## 요약
+Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API를 간편화 하기 위함.
 
 ## 순서
 
-* L : library
-* B : Backend
-* T : Target Server(kakao, naver 등)
+* LB : library
+* BE : Backend
+* TS : Target Server(kakao, naver 등)
 
 ```mermaid
 graph LR
-A(입력)-->B(연산)-->C(출력)
+A(TS) 전달--> B(BE)-->C(LB)
 ```
