@@ -27,7 +27,7 @@ LB ->> BE : State 생성 및 Redis 저장 후 전달
 BE ->> TE : State model에 넣어서 전달
 TE ->> TS : 로그인 요청
 TS ->> TS : 로그인 인증 처리
-TS ->> LB : redirect-tul로 CallBack 처리
+TS ->> LB : redirect-url로 CallBack 처리 (Filter에서 처리)
 LB ->> LB : State 체크
 LB ->> TS : CallBack의 인증 code로 TS에 인증 토큰 요청
 TS ->> LB : 결과(인증 토큰) 전달
