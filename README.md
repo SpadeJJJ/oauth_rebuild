@@ -12,6 +12,7 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 * BE : Backend
 * FE : frontend
 * TS : Target Server(kakao, naver 등)
+* TE : Template Engin(jsp, thymeleaf 등)
 
 ### 1. FE와 BE가 따로 있는 경우
 ```mermaid
@@ -25,4 +26,7 @@ LB ->> BE : Publisher를 통해 LB를 사용하고 있는 프로젝트에 인증
 ```
 
 ### 2. WAS에 한 번에 있는 경우 
-
+```mermaid
+sequenceDiagram
+BE
+```
