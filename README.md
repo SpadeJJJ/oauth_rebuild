@@ -13,7 +13,7 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 * FE : frontend
 * TS : Target Server(kakao, naver 등)
 
-1. FE와 BE가 따로 있는 경우
+# 1. FE와 BE가 따로 있는 경우
 ```mermaid
 sequenceDiagram
 FE ->> TS: FE에서 State 생성 후 로그인 요청
@@ -24,5 +24,5 @@ TS ->> LB : 인증 토큰 전달
 LB ->> BE : Publisher를 통해 LB를 사용하고 있는 프로젝트에 인증 토큰 전달
 ```
 
-2. 
+# 2. WAS에 한 번에 있는 경우 
 
