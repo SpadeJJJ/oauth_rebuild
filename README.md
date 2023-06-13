@@ -44,9 +44,9 @@ LB ->> BE : Publisher를 통해 LB를 사용하고 있는 프로젝트에 인증
 
 ## library 요약
 * 
- 1. 기업의 API 서버에서 CallBack url을 호출하면 Filter를 통해서 해당 요청을 받음.
- 2. 상황에 따라 State를 검증함.
- 3. Filter에서 url에 따라 기관을 분류하고, 기관별 인증 로직을 수행함.
- 4. 수행한 결과(인증 토큰)를 Event Publisher <--> Event Listener를 통해 전달
+    1. 기업의 API 서버에서 CallBack url을 호출하면 Filter를 통해서 해당 요청을 받음.
+    2. 상황에 따라 State를 검증함.
+    3. Filter에서 url에 따라 기관을 분류하고, 기관별 인증 로직을 수행함.
+    4. 수행한 결과(인증 토큰)를 Event Publisher <--> Event Listener를 통해 전달
 
 
