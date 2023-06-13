@@ -12,9 +12,10 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 * BE : Backend
 * TS : Target Server(kakao, naver 등)
 
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
-ㅓ
+```mermaid
+graph LR
+A[Hard edge] -->B(Round edge)
+    B --> C{Decision}
+    C -->|One| D[Result one]
+    C -->|Two| E[Result two]
+​```
