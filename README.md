@@ -8,5 +8,5 @@ Oauth2 인증 libarary 개발
 
 ```mermaid
 graph LR
-A(입력)-->B[연산]-->C(출력)
+A(입력)-->B(연산)-->C(출력)
 ```
