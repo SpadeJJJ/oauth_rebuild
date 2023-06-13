@@ -14,7 +14,9 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 
 ```mermaid
 sequenceDiagram
-사용자 --> FE: 로그인 요청
+FE ->> TS: FE에서 State 생성 후 로그인 요청
+TS ->> TS : 로그인 인증 처리
+
 Note right of Bob: Bob thinks
 Bob-->Alice: I am good thanks!
 ```
