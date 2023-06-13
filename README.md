@@ -13,9 +13,9 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 * TS : Target Server(kakao, naver 등)
 
 ```mermaid
-graph LR
-
-A(FE) --> B(BF)
-C(BF) --> B(BF)
-
+sequenceDiagram
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
 ```
