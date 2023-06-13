@@ -18,22 +18,13 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 
 ***
 
-### 1. FE와 BE가 따로 있는 경우
-```mermaid
-sequenceDiagram
-FE ->> TS : FE에서 State 생성 후 로그인 요청
-TS ->> TS : 로그인 인증 처리
-TS ->> LB : redirect-url로 CallBack 처리
-LB ->> TS : CallBack의 인증 code로 TS에 인증 토큰 요청
-TS ->> LB : 결과(인증 토큰) 전달
-LB ->> BE : Publisher를 통해 LB를 사용하고 있는 프로젝트에 인증 토큰 전달
-```
-
-### 2. WAS에 한 번에 있는 경우 
+### 흐름
 ```mermaid
 sequenceDiagram
 USER ->> BE : 로그인 페이지 호출
-BE ->> TE : State생성 후 model에 넣어서 전달
+BE ->> LB : State 생성 요청
+LB ->> BE : State 생성 및 Redis 저장 후 전달
+BE ->> TE : State model에 넣어서 전달
 TE ->> TS : 로그인 요청
 TS ->> TS : 로그인 인증 처리
 TS ->> LB : redirect-tul로 CallBack 처리
