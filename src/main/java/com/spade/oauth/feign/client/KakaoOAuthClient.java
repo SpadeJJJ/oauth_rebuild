@@ -11,9 +11,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 /**
  * Kakao OAuth 요청 Client
  */
-@FeignClient(value = "kakao", url = "${oauth2.kakao.authorize.host.url}")
+@FeignClient(value = "kakao", url = "${oauth2.authorize-info.kakao.host-url}")
 public interface KakaoOAuthClient {
-    @RequestMapping(value = "${oauth2.naver.login.authorize.token.url}", method = POST, consumes = APPLICATION_FORM_URLENCODED_VALUE)
+    @RequestMapping(value = "${oauth2.authorize-info.kakao.authorize-url}", method = POST, consumes = APPLICATION_FORM_URLENCODED_VALUE)
     @Headers("Content-Type: application/-www-form-urlencodexd;charset=utf-8")
     String requestAccessTokenCreate(ParamForAccessToken token);
 }

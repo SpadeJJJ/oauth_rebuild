@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service("kakaoParamService")
 public class KakaoRequestParamCreateService implements RequestParamCreateService {
 
-    @Value("${oauth2.kakao.clientid}")
+    @Value("${oauth2.authorize-info.kakao.client-id}")
     private String clientId;
 
     @Override
@@ -21,6 +21,7 @@ public class KakaoRequestParamCreateService implements RequestParamCreateService
         ParamForAccessToken param = new ParamForAccessToken();
 
         setCommonParam(param);
+
         param.setGrantType("authorization_code");
         param.setState(token.getState());
         param.setCode(token.getCode());

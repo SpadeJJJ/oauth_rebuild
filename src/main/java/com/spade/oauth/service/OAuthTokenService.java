@@ -30,9 +30,9 @@ public class OAuthTokenService {
     }
 
     public String requestToken(OAuthType oAuthType, ParamForCallBack param) {
-        String serviceName = oAuthType.type + "Service";
-        String paramServiceName = oAuthType.type+"ParamService";
-        String redisServiceName = oAuthType.type+"RedisService";
+        String serviceName = oAuthType.getName() + "Service";
+        String paramServiceName = oAuthType.getName()+"ParamService";
+        String redisServiceName = oAuthType.getName()+"RedisService";
         String result = "";
 
         OAuthService service = (OAuthService)applicationContext.getBean(serviceName);

@@ -1,5 +1,6 @@
 package com.spade.oauth.filter;
 
+import com.spade.oauth.context.OAuthPathContext;
 import com.spade.oauth.context.OAuthPathMapper;
 import com.spade.oauth.context.OAuthType;
 import com.spade.oauth.dto.model.OAuthResultToken;
@@ -25,7 +26,6 @@ import java.net.http.HttpResponse;
  * CallBack 요청 여부 확인 - 요청 타입 확인 - 요청 파라미터 추출 - OAuth 요청 결과 확인 - Event 발생.
  */
 @RequiredArgsConstructor
-@Component
 public class OAuthServiceFilter extends OncePerRequestFilter {
 
     private final OAuthPathMapper oAuthPathMapper;
@@ -34,16 +34,21 @@ public class OAuthServiceFilter extends OncePerRequestFilter {
 
     private final OAuthResultService oAuthResultService;
 
+//    private final OAuthPathContext oAuthPathContext;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String requestUrl = request.getRequestURI();
-        String matchResult = oAuthPathMapper.match(requestUrl);
+
+
+
 
         /** CallBack 요청이 맞을 경우 */
-        if (!matchResult.equals("empty")) {
+        if (matchResult != null) {
             /** 요청 타입.(naver, kakao 등) */
-            OAuthType type = OAuthType.valueOf(matchResult.toUpperCase());
-            System.out.println("["+type.type+"] request. "+requestUrl);
+//            OAuthType type = OAuthType.valueOf(matchResult.toUpperCase());
+
+            OAuthType type = OAuthType.valueOf("nave");
+            System.out.println("["+type.getName()+"] request. "+requestUrl);
 
             /** CallBack 요청의 파라미터 추출(State, Code 등) */
             ParamForCallBack param = oAuthPathMapper.getParam(request.getParameterMap());

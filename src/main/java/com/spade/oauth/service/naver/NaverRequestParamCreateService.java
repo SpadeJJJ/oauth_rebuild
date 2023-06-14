@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 @Service("naverParamService")
 public class NaverRequestParamCreateService implements RequestParamCreateService {
 
-    @Value("${oauth2.naver.clientid}")
+    @Value("${oauth2.authorize-info.naver.client-id}")
     private String clientId;
-    @Value("${oauth2.naver.secretkey}")
+    @Value("${oauth2.authorize-info.naver.secret-key}")
     private String clientSecret;
 
     @Override

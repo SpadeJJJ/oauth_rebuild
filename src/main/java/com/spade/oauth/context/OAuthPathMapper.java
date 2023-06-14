@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.spade.oauth.dto.model.param.ParamForCallBack;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.AntPathRequestMatcherProvider;
 import org.springframework.boot.autoconfigure.security.servlet.RequestMatcherProvider;
@@ -12,6 +13,8 @@ import org.springframework.util.AntPathMatcher;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * CallBack url Mather.
@@ -20,22 +23,21 @@ import java.util.Map;
  * 변경 예정
  */
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OAuthPathMapper {
-
-    private OAuthPathRepository oAuthPathRepository;
+    private final OAuthPathContext oAuthPathContext;
 
     public String match(String requestUrl) {
-        AntPathMatcher antPathMatcher = new AntPathMatcher();
-
-        String result = "empty";
-
-        for(String path : oAuthPathRepository.getOAuthPaths()) {
-            if (antPathMatcher.match(path, requestUrl)) {
-                result = path.split("/")[1];
-                break;
+        String result = null;
+//
+        for (String key : oAuthPathContext.getAuthorizeInfo().keySet()) {
+            Pattern pattern = Pattern.compile(oAuthPathContext.getAuthorizeInfo().get(key).getCallBackUrl() +"*");
+            Matcher matcher = pattern.matcher(requestUrl);
+            if(matcher.find()) {
+                result = key;
             }
         }
+
         return result;
     }
 

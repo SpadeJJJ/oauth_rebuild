@@ -20,6 +20,7 @@ public class OAuthState {
     @Indexed
     private String state;
 
+    /** naver, kakao etc. */
     @Indexed
     private String type;
 

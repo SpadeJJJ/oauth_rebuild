@@ -1,6 +1,7 @@
 package com.spade.oauth.config;
 
 
+import com.spade.oauth.context.OAuthPathContext;
 import com.spade.oauth.context.StateContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -18,5 +19,10 @@ public class StateAutoConfiguration {
     @Bean
     public StateContext stateContext() {
         return new StateContext();
+    }
+
+    @Bean
+    public OAuthPathContext oAuthPathContext() {
+        return new OAuthPathContext();
     }
 }

@@ -1,7 +1,7 @@
 package com.spade.oauth.config;
 
+import com.spade.oauth.context.OAuthPathContext;
 import com.spade.oauth.context.OAuthPathMapper;
-import com.spade.oauth.context.OAuthPathRepository;
 import com.spade.oauth.context.StateContext;
 import com.spade.oauth.event.OAuthResultService;
 import com.spade.oauth.feign.client.KakaoOAuthClient;
@@ -10,15 +10,12 @@ import com.spade.oauth.service.OAuthTokenService;
 import com.spade.oauth.service.kakao.KakaoOAuthService;
 import com.spade.oauth.service.naver.NaverOAuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
-
-import java.util.List;
 
 /**
  * Spring 자동 설정 - OAuth
@@ -30,9 +27,8 @@ import java.util.List;
 @EnableFeignClients("com.spade.oauth.feign")
 public class OAuthAutoConfiguration {
 
-    @Value("${oauth2.authorize.callback.urls}")
-    private final List<String> paths;
 
+    private final OAuthPathContext oAuthPathContext;
     private final NaverOAuthClient naverOauthClient;
 
     private final KakaoOAuthClient kakaoOauthClient;
@@ -57,13 +53,9 @@ public class OAuthAutoConfiguration {
 
     @Bean
     public OAuthPathMapper oAuthPathMapper() {
-        return new OAuthPathMapper(oAuthPathRepository(paths));
+        return new OAuthPathMapper(oAuthPathContext);
     }
 
-    @Bean
-    public OAuthPathRepository oAuthPathRepository(List<String> paths) {
-        return new OAuthPathRepository(paths);
-    }
 
     @Bean
     public OAuthResultService oAuthResultService(ApplicationEventPublisher applicationEventPublisher) {

@@ -12,10 +12,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 /**
  * Naver OAuth 요청 Client
  */
-@FeignClient(value = "naver", url = "${oauth2.naver.authorize.host.url}", configuration = FeignConfig.class)
+@FeignClient(value = "naver", url = "${oauth2.authorize-info.naver.host-url}", configuration = FeignConfig.class)
 public interface NaverOAuthClient {
 
-    @RequestMapping(value = "${oauth2.naver.login.authorize.token.url}", method = POST, consumes = APPLICATION_FORM_URLENCODED_VALUE)
+    @RequestMapping(value = "${oauth2.authorize-info.naver.authorize-url}", method = POST, consumes = APPLICATION_FORM_URLENCODED_VALUE)
     @Headers("Content-Type: application/-www-form-urlencodexd;charset=utf-8")
     String requestAccessTokenCreate(ParamForAccessToken token);
 
