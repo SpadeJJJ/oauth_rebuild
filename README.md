@@ -33,7 +33,8 @@ LB ->> TS : CallBack의 인증 code로 TS에 인증 토큰 요청
 TS ->> LB : 결과(인증 토큰) 전달
 LB ->> BE : Publisher를 통해 LB를 사용하고 있는 프로젝트에 인증 토큰 전달
 ```
-이 경우에 State는 LB의 redis를 통해 관리
+이 경우에 LB에서 Redis를 통해 State를 처리.
+FE가 따로 있는 경우에는 State를 LB에서 처리하지 않음.
 
 ***
 
