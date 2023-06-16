@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * OAuth 토큰 Request(feign) Naver 구현체
+ * todo
+ * 이것도 공통이므로 CommonOAuthService으로 kakao, naver 통합 예정
  */
 @Service("naverService")
 @RequiredArgsConstructor

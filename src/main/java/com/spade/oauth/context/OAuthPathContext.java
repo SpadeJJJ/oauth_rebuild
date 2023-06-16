@@ -1,39 +1,67 @@
 package com.spade.oauth.context;
 
-import com.spade.oauth.PropertiesDto;
-import lombok.Getter;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * @ConfigurationProperties 규칙
- * 1. prefix option
- * 2. @Component
- * 3. 변수명 == properties의 var와 매치
- *  (ex. property.authorize.naver.host-url)
+ * 모든 .properties key - value 저장.
+ * callback url 관리
+ *
+ * properties : oauth2.authorize-info.naver.host-url, https://kauth.kakao.com/oauth 형식
+ * oAuthPathMap : /naver/callback(등록한 callback url), naver (기업명) 형식
  */
-@ConfigurationProperties(prefix = "oauth2")
-@Component
+@RequiredArgsConstructor
+@Configuration
 @Setter
-@Getter
 public class OAuthPathContext {
-    private Map<String, PropertiesDto> authorizeInfo;
 
-    public List<String> toList() {
-        ArrayList<String> result = new ArrayList<>();
+    @Resource(name = "properties")
+    private Map<String, String> properties;
 
-        for (String key : authorizeInfo.keySet()) {
-            result.add(authorizeInfo.get(key).getCallBackUrl());
+    private Map<String, String> oAuthPathMap = new HashMap<>();
+
+    /** oAuthPathMap init */
+    @PostConstruct
+    public void setOAuthPaths() {
+        String pathPattern = "(\\boauth2.authorize-info.\\b)(.*)(\\b.call-back-url\\b)";
+        Pattern patten = Pattern.compile(pathPattern);
+
+        for (String key : properties.keySet()) {
+            Matcher matcher = patten.matcher(key);
+            if (matcher.find()) {
+                String type = matcher.group(2);
+                oAuthPathMap.put(properties.get(key), type);
+            }
+        }
+    }
+
+    public Map<String, String> getOAuthPathMap() {
+        return this.oAuthPathMap;
+    }
+
+    public String findProperties(String key) {
+        if (this.properties.containsKey(key)) {
+            return properties.get(key);
+        }
+
+        return null;
+    }
+
+    public String match(String requestUri) {
+        String result = null;
+
+        if(oAuthPathMap.containsKey(requestUri)) {
+            return oAuthPathMap.get(requestUri);
         }
 
         return result;
     }
-
-
 }

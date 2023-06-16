@@ -9,13 +9,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ParamForOAuthAuthorizeRequest {
+public class ResultParamForOAuthLoginRequest {
 
-    private ParamForOAuthAuthorizeRequest(String code) {
+    private ResultParamForOAuthLoginRequest(String code) {
         this.code = code;
     }
 
-    public ParamForOAuthAuthorizeRequest(String state, String code) {
+    public ResultParamForOAuthLoginRequest(String state, String code) {
         this.state = state;
         this.code = code;
     }

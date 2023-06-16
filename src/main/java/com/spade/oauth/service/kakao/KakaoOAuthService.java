@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * OAuth 토큰 Request(feign) Kakao 구현체
+ *
+ * todo
+ * 통합 예정
  */
 @Service("kakaoService")
 @RequiredArgsConstructor

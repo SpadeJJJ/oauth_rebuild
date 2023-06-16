@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * Redis에서 Naver의 State를 처리하기 위한 서비스.
+ * Redis에서 Naver의 State를 처리하기 위한 서비스
+ *
+ * todo
+ * 통합 예정
  */
 @Service("naverRedisService")
 @ConditionalOnProperty(prefix = "spring.data.redis.repositories", name = "enabled", havingValue = "true",

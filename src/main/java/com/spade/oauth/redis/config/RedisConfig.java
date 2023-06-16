@@ -16,6 +16,10 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 
 /**
  * Redis 설정 클래스
+ *
+ * todo
+ * 이거 만약에 host, port 둘 중에 하나라도 null이면
+ * redis 사용 안 하게 설정해야 함.
  */
 //@EnableRedisRepositories
 @Configuration
@@ -23,6 +27,7 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 //@ConditionalOnProperty(prefix = "spring.data.redis.repositories", name = "enabled", havingValue = "true",
 //        matchIfMissing = true)
 //@ConditionalOnProperty({"spring.cache.redis.host", "spring.cache.redis.port"})
+
 public class RedisConfig {
 
     @Value("${spring.cache.redis.host}")

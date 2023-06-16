@@ -1,7 +1,7 @@
 package com.spade.oauth.service.kakao;
 
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
-import com.spade.oauth.dto.model.param.ParamForOAuthAuthorizeRequest;
+import com.spade.oauth.dto.model.param.ResultParamForOAuthLoginRequest;
 import com.spade.oauth.service.RequestParamCreateService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class KakaoRequestParamCreateService implements RequestParamCreateService
     private String clientId;
 
     @Override
-    public ParamForAccessToken createParamForAccessTokenCreate(ParamForOAuthAuthorizeRequest token) {
+    public ParamForAccessToken createParamForAccessTokenCreate(ResultParamForOAuthLoginRequest token) {
         ParamForAccessToken param = new ParamForAccessToken();
 
         setCommonParam(param);

@@ -6,6 +6,9 @@ import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * 삭제 예정
+ */
 @Getter
 @Setter
 public class PropertiesDto {

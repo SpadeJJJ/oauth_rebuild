@@ -2,6 +2,7 @@ package com.spade.oauth.dto.model.param;
 
 import feign.form.FormProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@NoArgsConstructor
 public class ParamForAccessToken {
     @FormProperty("client_id")
     private String clientId;
@@ -28,4 +30,5 @@ public class ParamForAccessToken {
     private String serviceProvider;
     @FormProperty("redirect_uri")
     private String redirectUri;
+
 }
