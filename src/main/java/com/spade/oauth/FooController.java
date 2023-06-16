@@ -10,6 +10,7 @@ import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
@@ -34,13 +35,11 @@ public class FooController {
 
     private final ObjectFactory<HttpMessageConverters> messageConverter;
 
-
+    private final Encoder encoder;
     private KK kk;
 
 
-    public Encoder get() {
-        return new FormEncoder(new SpringEncoder(messageConverter));
-    }
+
     @GetMapping("/{type}")
     public String set(@PathVariable("type") String type){
 //        String state = stateUtilService.createStateForOAuth(type);
@@ -61,8 +60,8 @@ public class FooController {
 
     @GetMapping("/tt")
     public String a() {
-        Encoder encoder = new Encoder.Default();
-        Decoder decoder = new Decoder.Default();
+//        Encoder encoder = new Encoder.Default();
+//        Decoder decoder = new Decoder.Default();
 
 //        SpringDecoder springDecoder = new SpringDecoder();
 
@@ -81,7 +80,7 @@ public class FooController {
 
             this.kk = Feign.builder()
                            .contract(new SpringMvcContract())
-                           .encoder(get())
+                           .encoder(encoder)
                            .target(KK.class, "https://nid.naver.com/oauth2.0/token");
 
 
