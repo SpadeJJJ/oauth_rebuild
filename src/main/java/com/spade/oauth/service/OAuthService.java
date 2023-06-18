@@ -1,5 +1,6 @@
 package com.spade.oauth.service;
 
+import com.spade.oauth.context.OAuthPathContext;
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
 
 /**
@@ -7,5 +8,5 @@ import com.spade.oauth.dto.model.param.ParamForAccessToken;
  */
 public interface OAuthService {
 
-    String requestForAuthorizeTokenCreate(ParamForAccessToken param);
+    String requestForAuthorizeTokenCreate(ParamForAccessToken param, String url);
 }

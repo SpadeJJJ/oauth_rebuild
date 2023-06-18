@@ -53,9 +53,9 @@ public class TestController {
         }
 
 
-        OAuthPathContext OAuthPathContext = new OAuthPathContext();
-        OAuthPathContext.setProperties(properties);
-        System.out.println("set "+ OAuthPathContext.getOAuthPathMap().keySet());;
+//        OAuthPathContext OAuthPathContext = new OAuthPathContext();
+//        OAuthPathContext.setProperties(properties);
+//        System.out.println("set "+ OAuthPathContext.getOAuthPathMap().keySet());;
 
 //
 //        System.out.println(a);

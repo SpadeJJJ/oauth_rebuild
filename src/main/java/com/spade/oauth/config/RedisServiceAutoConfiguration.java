@@ -24,23 +24,23 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @AutoConfiguration(after = RedisRepositoriesAutoConfigurationCustom.class)
 public class RedisServiceAutoConfiguration {
 
-    private final OAuthStateRepository oauthStateRepository;
-
-    private final StateContext stateContext;
-    @Bean
-    public RedisNaverOAuthStateService naverRedisService() {
-        return new RedisNaverOAuthStateService(oauthStateRepository);
-    }
-
-    @Bean
-    public RedisKakaoOAuthStateService kakaoRedisService() {
-        return new RedisKakaoOAuthStateService(oauthStateRepository);
-    }
-
-    @Bean
-    public StateUtilService stateUtilService() {
-        return new StateUtilService(oauthStateRepository, stateContext);
-    }
+//    private final OAuthStateRepository oauthStateRepository;
+//
+//    private final StateContext stateContext;
+//    @Bean
+//    public RedisNaverOAuthStateService naverRedisService() {
+//        return new RedisNaverOAuthStateService(oauthStateRepository);
+//    }
+//
+//    @Bean
+//    public RedisKakaoOAuthStateService kakaoRedisService() {
+//        return new RedisKakaoOAuthStateService(oauthStateRepository);
+//    }
+//
+//    @Bean
+//    public StateUtilService stateUtilService() {
+//        return new StateUtilService(oauthStateRepository, stateContext);
+//    }
 
 
 }

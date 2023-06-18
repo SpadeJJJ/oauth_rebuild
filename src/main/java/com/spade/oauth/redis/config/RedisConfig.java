@@ -1,5 +1,8 @@
 package com.spade.oauth.redis.config;
 
+import com.spade.oauth.context.OAuthPathContext;
+import com.spade.oauth.context.StateContext;
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,20 +27,22 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 //@EnableRedisRepositories
 @Configuration
 @RequiredArgsConstructor
-//@ConditionalOnProperty(prefix = "spring.data.redis.repositories", name = "enabled", havingValue = "true",
-//        matchIfMissing = true)
-//@ConditionalOnProperty({"spring.cache.redis.host", "spring.cache.redis.port"})
-
 public class RedisConfig {
 
-    @Value("${spring.cache.redis.host}")
-    private String host;
+    private final OAuthPathContext oAuthPathContext;
 
-    @Value("${spring.cache.redis.port}")
-    private int port;
+    private final StateContext stateContext;
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(host, port);
+        if (oAuthPathContext.findProperties("oauth2.authorize-info.reids.host") != null &&
+                oAuthPathContext.findProperties("oauth2.authorize-info.reids.port") != null) {
+            stateContext.setRedisUse(true);
+            return new LettuceConnectionFactory(oAuthPathContext.findProperties("oauth2.authorize-info.reids.host"),
+                    Integer.parseInt(oAuthPathContext.findProperties("oauth2.authorize-info.reids.port")));
+        }
+
+        stateContext.setRedisUse(false);
+        return null;
     }
 }

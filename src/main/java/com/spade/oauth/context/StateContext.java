@@ -16,16 +16,26 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class StateContext {
 
-    private boolean STATE_USE_YN = true;
+    private static boolean STATE_USE = true;
+
+    private static boolean REDIS_USE = false;
 
     private Map<String, String> stateMap = new HashMap<>();
 
-    public void setStateUse(boolean useYn) {
-        this.STATE_USE_YN = useYn;
+    public void setStateUse(boolean use) {
+        this.STATE_USE = use;
+
+        if (!STATE_USE) {
+            REDIS_USE = false;
+        }
+    }
+
+    public void setRedisUse(boolean use) {
+        this.REDIS_USE = use;
     }
 
     public boolean checkStateUse() {
-        return this.STATE_USE_YN;
+        return this.STATE_USE;
     }
 
     public boolean checkState(String state) {
@@ -38,5 +48,13 @@ public class StateContext {
 
     public void setState(String state, String type) {
         stateMap.put(state, type);
+    }
+
+    public static boolean isUseState() {
+        return STATE_USE;
+    }
+
+    public static boolean isUseRedis() {
+        return REDIS_USE;
     }
 }

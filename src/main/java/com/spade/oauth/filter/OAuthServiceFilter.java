@@ -1,6 +1,6 @@
 package com.spade.oauth.filter;
 
-import com.spade.oauth.context.ParamMapUtil;
+import com.spade.oauth.util.ParamMapUtil;
 import com.spade.oauth.context.OAuthPathContext;
 import com.spade.oauth.dto.model.OAuthResultToken;
 import com.spade.oauth.dto.model.param.ParamForCallBack;
@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.io.IOException;
  * CallBack 요청 여부 확인 - 요청 타입 확인 - 요청 파라미터 추출 - OAuth 요청 결과 확인 - Event 발생.
  */
 @RequiredArgsConstructor
+@Component
 public class OAuthServiceFilter extends OncePerRequestFilter {
 
     private final OAuthTokenService oAuthTokenService;
@@ -29,6 +31,7 @@ public class OAuthServiceFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String requestUri = request.getRequestURI();
         String type = OAuthPathContext.match(requestUri);
+        System.out.println("call "+type);
 
         /** CallBack 요청이 맞을 경우 */
         if (type != null) {
@@ -37,6 +40,7 @@ public class OAuthServiceFilter extends OncePerRequestFilter {
             ParamForCallBack param = ParamMapUtil.getParam(request.getParameterMap());
             /** OAuth 요청 결과 */
             String result = oAuthTokenService.requestToken(type, param);
+            System.out.println("result in filter ? "+result);
 
             /** Publish Event */
             OAuthResultToken resultToken = oAuthTokenService.send(result, request.getRequestURL().toString(), request.getQueryString());

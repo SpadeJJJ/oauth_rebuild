@@ -18,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Configuration
 @RequiredArgsConstructor
 public class FeignConfig {
-//    @Bean
-//    Encoder formEncoder() {
-//        return new feign.form.FormEncoder();
-//    }
 
     private final ObjectFactory<HttpMessageConverters> messageConverter;
 

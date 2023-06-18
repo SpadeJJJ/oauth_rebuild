@@ -4,6 +4,7 @@ import lombok.*;
 
 /**
  * OAuth 인증 요청에 필요한 파라미터 정보 토큰
+ * 삭제예정
  */
 @Getter @Setter
 @NoArgsConstructor

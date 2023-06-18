@@ -13,13 +13,13 @@ import org.springframework.context.annotation.Bean;
 @RequiredArgsConstructor
 @AutoConfiguration(after = OAuthAutoConfiguration.class)
 public class FilterAutoConfiguration {
-
-    private final OAuthTokenService oAuthTokenService;
-
-    private final OAuthPathContext oAuthPathContext;
-
-    @Bean
-    public OAuthServiceFilter oAuthServiceFilter() {
-        return new OAuthServiceFilter(oAuthTokenService, oAuthPathContext);
-    }
+//
+//    private final OAuthTokenService oAuthTokenService;
+//
+//    private final OAuthPathContext oAuthPathContext;
+//
+//    @Bean
+//    public OAuthServiceFilter oAuthServiceFilter() {
+//        return new OAuthServiceFilter(oAuthTokenService, oAuthPathContext);
+//    }
 }

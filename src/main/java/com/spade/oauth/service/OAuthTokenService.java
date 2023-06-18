@@ -1,13 +1,15 @@
 package com.spade.oauth.service;
 
+import com.spade.oauth.FooController;
+import com.spade.oauth.context.OAuthPathContext;
 import com.spade.oauth.context.StateContext;
 import com.spade.oauth.domain.redis.OAuthState;
 import com.spade.oauth.dto.model.OAuthResultToken;
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
 import com.spade.oauth.dto.model.param.ParamForCallBack;
-import com.spade.oauth.dto.model.param.ResultParamForOAuthLoginRequest;
 import com.spade.oauth.exception.AuthorizeFailureException;
 import com.spade.oauth.redis.service.RedisOAuthStateService;
+import com.spade.oauth.util.ParamCreateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -25,6 +27,8 @@ public class OAuthTokenService {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
+    private final OAuthPathContext oAuthPathContext;
+
     @Value("${spring.data.redis.repositories.enabled}")
     private boolean redisUse = true;
 
@@ -39,8 +43,6 @@ public class OAuthTokenService {
         String result = "";
 
         OAuthService service = (OAuthService)applicationContext.getBean(serviceName);
-
-        RequestParamCreateService paramService = (RequestParamCreateService) applicationContext.getBean(paramServiceName);
 
         if (stateContext.checkStateUse()) {
             if (redisUse) {
@@ -58,8 +60,14 @@ public class OAuthTokenService {
         }
 
         try {
-            ParamForAccessToken token = paramService.createParamForAccessTokenCreate(new ResultParamForOAuthLoginRequest(param.getState(), param.getCode()));
-            result = service.requestForAuthorizeTokenCreate(token);
+            ParamForAccessToken accessTokenParam = new ParamForAccessToken();
+            accessTokenParam.setCode(param.getCode());
+            accessTokenParam.setState(param.getState());
+            ParamCreateUtil.createAccessTokenParam(type, accessTokenParam, oAuthPathContext);
+
+            String url = ParamCreateUtil.getUrlForAccessToken(type, oAuthPathContext);
+            result = service.requestForAuthorizeTokenCreate(accessTokenParam,  url);
+            System.out.println("result ? "+result);
         } catch (AuthorizeFailureException e) {
             return e.getMessage();
         } catch (Exception e) {

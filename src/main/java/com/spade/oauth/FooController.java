@@ -1,22 +1,14 @@
 package com.spade.oauth;
 
+import com.spade.oauth.context.OAuthPathContext;
 import com.spade.oauth.dto.model.param.ParamForAccessToken;
 import feign.Contract;
 import feign.Feign;
-import feign.codec.Decoder;
 import feign.codec.Encoder;
-import feign.form.FormEncoder;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
-import org.springframework.cloud.openfeign.FeignClientProperties;
-import org.springframework.cloud.openfeign.support.SpringDecoder;
-import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -36,7 +28,6 @@ public class FooController {
     private final ObjectFactory<HttpMessageConverters> messageConverter;
 
     private final Encoder encoder;
-    private KK kk;
 
 
 
@@ -58,7 +49,6 @@ public class FooController {
         return new feign.Contract.Default();
     }
 
-    @GetMapping("/tt")
     public String a() {
 //        Encoder encoder = new Encoder.Default();
 //        Decoder decoder = new Decoder.Default();
@@ -76,28 +66,64 @@ public class FooController {
 //        param.setCode("dsfsefewsgsegsegewg");
 
 
+//            KK2 temp = Feign.builder()
+//                    .contract(new SpringMvcContract())
+//                    .encoder(encoder)
+//                    .target(KK2.class, "https://nid.naver.com/oauth2.0");
 
 
-            this.kk = Feign.builder()
-                           .contract(new SpringMvcContract())
-                           .encoder(encoder)
-                           .target(KK.class, "https://nid.naver.com/oauth2.0/token");
+
+//            this.kk = Feign.builder()
+//                           .contract(new SpringMvcContract())
+//                           .encoder(encoder)
+//                            .target(KK.class, "https://nid.naver.com/oauth2.0");
 
 
-            ParamForAccessToken param = new ParamForAccessToken();
-            param.setGrantType("authorization_code");
-            param.setClientId("UMKT4dIs6FAj23xkYaC1");
-            param.setClientSecret("fwBz2BIrLyf");
-            param.setState("111111111111");
-            param.setCode("1dfwefwefwef");
-
-            result= kk.requestAccessTokenCreate2(param);
-            System.out.println("?? "+result);
+//            ParamForAccessToken param = new ParamForAccessToken();
+//            param.setGrantType("authorization_code");
+//            param.setClientId("UMKT4dIs6FAj23xkYaC1");
+//            param.setClientSecret("fwBz2BIrLyf");
+//            param.setState("111111111111");
+//            param.setCode("1dfwefwefwef");
+//
+////            result= kk.requestAccessTokenCreate2(param);
+//            result = temp.requestAccessTokenCreate2(param);
+//            System.out.println("?? "+result);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("hi "+e.getMessage());
             return e.getMessage();
         }
         return result;
     }
 
+//    public static class ParamCreateUtil {
+//
+//        private static final String PROPERTIES_PROFIX = "oauth2.authorize-info.";
+//        private static final String CALL_BACL_URL = ".call-back-url";
+//        private static final String GRANT_TYPE = ".grant-type";
+//        private static final String CLIENT_ID = ".client-id";
+//        private static final String SECRET_KEY = ".secret-key";
+//        private static final String URL = ".host-url";
+//
+//        public static void createAccessTokenParam(String type, ParamForAccessToken param, OAuthPathContext oAuthPathContext) {
+//
+//            if (type.equals("naver")) {
+//                oAuthPathContext.print();
+//                System.out.println("check key "+PROPERTIES_PROFIX+type+GRANT_TYPE);
+//                param.setClientId(oAuthPathContext.findProperties(PROPERTIES_PROFIX+type+CLIENT_ID));
+//                param.setGrantType(oAuthPathContext.findProperties(PROPERTIES_PROFIX+type+GRANT_TYPE));
+//                param.setClientSecret(oAuthPathContext.findProperties(PROPERTIES_PROFIX+type+SECRET_KEY));
+//                System.out.println("param garnt "+param.getGrantType());
+//            } else if(type.equals("kakao")) {
+//                param.setClientId(oAuthPathContext.findProperties(PROPERTIES_PROFIX+type+CLIENT_ID));
+//                param.setGrantType(oAuthPathContext.findProperties(PROPERTIES_PROFIX+type+GRANT_TYPE));
+//            }
+//        }
+//
+//        public static String getUrlForAccessToken(String type, OAuthPathContext oAuthPathContext) {
+//            System.out.println("what fuck "+PROPERTIES_PROFIX+type+URL);
+//            System.out.println("what fuck result "+oAuthPathContext.findProperties(PROPERTIES_PROFIX+type+URL));
+//            return oAuthPathContext.findProperties(PROPERTIES_PROFIX+type+URL);
+//        }
+//    }
 }

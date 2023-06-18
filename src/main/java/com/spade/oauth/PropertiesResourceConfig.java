@@ -3,24 +3,28 @@ package com.spade.oauth;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resources;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.apache.bcel.util.ClassPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.boot.env.OriginTrackedMapPropertySource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.StandardEnvironment;
+import org.springframework.core.annotation.Order;
+import org.springframework.core.env.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.context.support.StandardServletEnvironment;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.util.Map;
 import java.util.Properties;
 
 
@@ -28,17 +32,20 @@ import java.util.Properties;
 @RequiredArgsConstructor
 public class PropertiesResourceConfig {
 
+    @Autowired
+    private final StandardServletEnvironment standardServletEnvironment;
+
+    @Autowired
+    private final Environment environment;
+
     @Bean(name = "properties")
-    public static PropertiesFactoryBean mapper() {
+    public PropertiesFactoryBean mapper() throws IOException {
         System.out.println("call ");
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
-//        bean.setLocation(new ClassPathResource("application.properties"));
 
-        String path = "./src/main/resources/config";
+        String path = ResourceUtils.getFile("classpath:application.properties").getAbsolutePath().replace("application.properties", "").replace("\\", "/") + "config";
         File file = new File(path);
         String[] filesName = file.list();
-
-//        System.out.println(filesName.length);
 
         ClassPathResource[] classPathResources = new ClassPathResource[filesName.length+1];
         for (int i = 0; i < filesName.length; i++) {
@@ -51,20 +58,28 @@ public class PropertiesResourceConfig {
         return bean;
     }
 
-    @Autowired
-    private final StandardServletEnvironment standardServletEnvironment;
-
     @PostConstruct
     public void setUp() throws IOException {
-        System.out.println("setUp call");
-        String path = "./src/main/resources/config";
+        String path = ResourceUtils.getFile("classpath:application.properties").getAbsolutePath().replace("application.properties", "").replace("\\", "/")+"config";
+        System.out.println("? "+path);
         File file = new File(path);
         String[] filesName = file.list();
+
+//        PropertySource testP = standardServletEnvironment.getPropertySources().get("Config resource 'class path resource [application.properties]' via location 'optional:classpath:/'");
+
         for (String name : filesName) {
-            Resource resource = new FileSystemResource(path+"/"+name);
             Properties properties = new Properties();
+            System.out.println(name);
+            Resource resource = new ClassPathResource("/config/"+name);
             PropertiesLoaderUtils.fillProperties(properties, resource);
             standardServletEnvironment.getPropertySources().addLast(new PropertiesPropertySource(name, properties));
         }
+
+//        standardServletEnvironment.getPropertySources().addLast(new PropertiesPropertySource("test", properties));
+//        System.out.println("check1 "+standardServletEnvironment.getPropertySources().get("test").containsProperty("oauth2.authorize-info.kakao.client-id"));
+//        System.out.println("check2 "+standardServletEnvironment.getPropertySources().get("test").containsProperty("oauth2.authorize-info.naver.secret-key"));
+//        System.out.println("check3 "+standardServletEnvironment.getPropertySources().get("test").getSource().toString());
+//        standardServletEnvironment.getPropertySources().addFirst(new OriginTrackedMapPropertySource("Config resource 'class path resource [application.properties]' via location 'optional:classpath:/'", properties));
+
     }
 }

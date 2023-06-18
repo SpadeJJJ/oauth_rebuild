@@ -1,4 +1,4 @@
-package com.spade.oauth.context;
+package com.spade.oauth.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

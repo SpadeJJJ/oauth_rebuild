@@ -54,7 +54,7 @@ dependencies {
     api 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     api 'org.springframework.boot:spring-boot-configuration-processor'
     implementation group: 'com.netflix.feign', name: 'feign-jackson', version: '8.18.0'
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-loadbalancer', version: '4.0.3'
+//    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-loadbalancer', version: '4.0.3'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

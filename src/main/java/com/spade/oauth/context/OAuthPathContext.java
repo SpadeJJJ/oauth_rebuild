@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 public class OAuthPathContext {
 
     @Resource(name = "properties")
-    private Map<String, String> properties;
+    private final Map<String, String> properties;
 
     private Map<String, String> oAuthPathMap = new HashMap<>();
 

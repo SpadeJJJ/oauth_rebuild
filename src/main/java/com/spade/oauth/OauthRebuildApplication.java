@@ -11,7 +11,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
         RedisAutoConfiguration.class, RedisRepositoriesAutoConfiguration.class
 })
 @EnableFeignClients
-//@EnableConfigurationProperties(TestDTo.class)
 public class OauthRebuildApplication {
 
     public static void main(String[] args) {

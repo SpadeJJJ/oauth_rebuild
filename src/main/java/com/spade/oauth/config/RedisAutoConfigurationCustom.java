@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Bean;
 @AutoConfiguration
 public class RedisAutoConfigurationCustom extends RedisAutoConfiguration {
 
-    @Bean
-    RedisConfig redisConfig() {
-        return new RedisConfig();
-    }
+//    @Bean
+//    RedisConfig redisConfig() {
+//        return new RedisConfig();
+//    }
 }
