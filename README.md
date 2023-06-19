@@ -43,9 +43,9 @@ OAuthServiceFilter ->> OAuthServiceFilter : 생성 결과 publish.
 ***
 
 ### Spring 흐름도 클래스
-* OAuthServiceFilter : Callback url을 받고, Access token 생성 요청을 하기 위한 필터.
-* OAuthTokenServiceFactory : Access token 생성 요청을 수행하는 Service Bean 찾고, token 요청 param 생성하는 클래스.
-* OAuthService : access token을 직접 요청하는 service.
+* OAuthServiceFilter: Callback url을 받고, Access token 생성 요청을 하기 위한 필터.
+* OAuthTokenServiceFactory: access token 생성 요청을 수행하는 Service Bean 찾고, token 요청 param 생성하는 클래스.
+* OAuthService: access token을 직접 요청하는 service.
 
 ## 서비스 정보 등록
 * 설정 위치 : resources/config
