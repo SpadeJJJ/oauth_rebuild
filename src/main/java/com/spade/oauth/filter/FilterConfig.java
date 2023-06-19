@@ -13,7 +13,7 @@ import org.springframework.context.annotation.DependsOn;
  */
 @Configuration
 @RequiredArgsConstructor
-@DependsOn(value = {"OAuthTokenService", "OAuthPathContext"})
+@DependsOn(value = {"OAuthTokenServiceFactory", "OAuthPathContext"})
 public class FilterConfig {
 
     /** Request token을 처리하는 서비스 */
