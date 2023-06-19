@@ -47,7 +47,9 @@ FE가 따로 있는 경우에는 State를 LB에서 처리하지 않음.
 
 ## 서비스 정보 등록
 * 설정 위치 : resources/config
-* 
+* 형식 : *.properties
+
+설정 정보
 oauth2.authorize-info.naver.request-token-url=https://nid.naver.com/oauth2.0/token
 oauth2.authorize-info.naver.client-id=UMKT4dIs6FAj23xkYaC1
 oauth2.authorize-info.naver.secret-key=fwBz2BIrLy
