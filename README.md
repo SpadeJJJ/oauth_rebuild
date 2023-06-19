@@ -45,20 +45,15 @@ FE가 따로 있는 경우에는 State를 LB에서 처리하지 않음.
     3. Filter에서 url에 따라 기관을 분류하고, 기관별 인증 로직을 수행함.
     4. 수행한 결과(인증 토큰)를 Event Publisher <--> Event Listener를 통해 전달
 
-## library 설정 파일 - application.properties
-* 서버 설정 정보
-    1. host.url=localhost:8080
-
-* 기관 설정 정보
-    1. 기업 redirect-url : oauth2.{기업명}.authorize.callback.url=/naver/callback
-    2. 기업 host : oauth2.{기업명}.authorize.host.url=https://nid.naver.com/oauth2.0
-    3. 기업 인증 요청 url : oauth2.{기업명}.login.authorize.token.url=/token
-    4. 기업 client-id : oauth2.{기업명}.clientid=UMKT4dIs6FAj23xkYaC1
-    5. 기업 secret-key : oauth2.{기업명}.secretkey=fwBz2BIrLy
-
-* redis
-    1. Redis host : spring.cache.redis.host=localhost 
-    2. Redis port : spring.cache.redis.port=6379
-    3. Redis 사용여부 : spring.data.redis.repositories.enabled=true  - 수정 예정.
+## 서비스 정보 등록
+* 설정 위치 : resources/config
+* 
+oauth2.authorize-info.naver.request-token-url=https://nid.naver.com/oauth2.0/token
+oauth2.authorize-info.naver.client-id=UMKT4dIs6FAj23xkYaC1
+oauth2.authorize-info.naver.secret-key=fwBz2BIrLy
+oauth2.authorize-info.naver.call-back-uri=/naver/callback
+oauth2.authorize-info.naver.call-back-host=http://localhost:8080
+oauth2.authorize-info.naver.grant-type=authorization_code
+oauth2.authorize-info.naver.authorize-url=https://nid.naver.com/oauth2.0/authorize
 
 
