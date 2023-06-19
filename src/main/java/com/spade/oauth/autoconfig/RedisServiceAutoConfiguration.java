@@ -1,16 +1,8 @@
-package com.spade.oauth.config;
+package com.spade.oauth.autoconfig;
 
-import com.spade.oauth.context.StateContext;
-import com.spade.oauth.redis.config.RedisConfig;
-import com.spade.oauth.redis.repository.OAuthStateRepository;
-import com.spade.oauth.redis.service.StateUtilService;
-import com.spade.oauth.redis.service.kakao.RedisKakaoOAuthStateService;
-import com.spade.oauth.redis.service.naver.RedisNaverOAuthStateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 /**

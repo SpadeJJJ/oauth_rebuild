@@ -1,4 +1,4 @@
-package com.spade.oauth.config;
+package com.spade.oauth.autoconfig;
 
 
 import lombok.RequiredArgsConstructor;

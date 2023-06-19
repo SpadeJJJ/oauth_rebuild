@@ -1,42 +1,70 @@
 package com.spade.oauth.service.kakao;
 
-import com.spade.oauth.dto.model.param.ParamForAccessToken;
+import com.spade.oauth.dto.param.ParamForAccessToken;
 import com.spade.oauth.exception.AuthorizeFailureException;
-import com.spade.oauth.feign.client.OAuthClient;
+import com.spade.oauth.feign.client.OAuthKakaoClient;
+import com.spade.oauth.feign.client.OAuthNaverClient;
+import com.spade.oauth.property.KakaoOAuthProperty;
 import com.spade.oauth.service.OAuthService;
 
 import feign.Feign;
 import feign.codec.Encoder;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * OAuth 토큰 Request(feign) Kakao 구현체
- *
- * todo
- * 통합 예정
+ * Request token 처리 서비스
  */
 @Service("kakaoService")
 @RequiredArgsConstructor
 public class KakaoOAuthService implements OAuthService {
 
+    /** Spring Encoder */
     private final Encoder encoder;
 
+    /** kakao 관련 property */
+    private final KakaoOAuthProperty kakaoOAuthProperty;
+
+    /** Request token 요청용 kakao client */
+    private OAuthKakaoClient oAuthKakaoClient;
+
+    /** kakao 수동 등록 */
+    @PostConstruct
+    public void setOAuthClient() {
+        oAuthKakaoClient = Feign.builder()
+                               .contract(new SpringMvcContract())
+                               .encoder(encoder)
+                               .target(OAuthKakaoClient.class, kakaoOAuthProperty.getRequestTokenUrl());
+    }
+
+    /** OAuth token 생성 요청  */
     @Override
-    public String requestForAuthorizeTokenCreate(ParamForAccessToken param, String url) {
+    public String requestForAuthorizeTokenCreate(ParamForAccessToken param) {
         String result = null;
 
-        OAuthClient oAuthClient = Feign.builder()
-                .contract(new SpringMvcContract())
-                .encoder(encoder)
-                .target(OAuthClient.class, url);
-
-        result = oAuthClient.requestAccessTokenCreate(param);
+        result = oAuthKakaoClient.requestAccessTokenCreate(param);
         if(result == null) {
             throw new AuthorizeFailureException("kakao access token create fail");
         }
 
         return result;
+    }
+
+    /** authorize 요청 url 생성*/
+    @Override
+    public String createAuthorizeUrl() {
+        UriComponents uri = UriComponentsBuilder.newInstance()
+                                                .path(kakaoOAuthProperty.getAuthorizeUrl())
+                                                .queryParam("response_type", "code")
+                                                .queryParam("client_id", kakaoOAuthProperty.getClientId())
+                                                .queryParam("redirect_uri", kakaoOAuthProperty.getCallBackHost()+kakaoOAuthProperty.getCallBackUri())
+                                                .queryParam("state", createRandomState())
+                                                .build();
+
+        return uri.toString();
     }
 }

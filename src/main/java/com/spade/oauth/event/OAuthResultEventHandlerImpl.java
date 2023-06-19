@@ -1,15 +1,19 @@
 package com.spade.oauth.event;
 
-import com.spade.oauth.dto.model.OAuthResultToken;
+import com.spade.oauth.dto.OAuthResultToken;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 /**
- * OAuth 인증 요청 결과 Listener 구현 인터페이스
+ * Request token 결과 Listener 구현 인터페이스
  */
 
 @Component
 public class OAuthResultEventHandlerImpl implements OAuthResultEventHandler {
+
+    /**
+     * Request token 결과 subscribe 클래스.
+     */
     @Override
     @EventListener
     public void takeResult(OAuthResultToken token) {

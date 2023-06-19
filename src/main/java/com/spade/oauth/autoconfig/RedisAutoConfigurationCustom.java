@@ -1,6 +1,5 @@
-package com.spade.oauth.config;
+package com.spade.oauth.autoconfig;
 
-import com.spade.oauth.redis.config.RedisConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

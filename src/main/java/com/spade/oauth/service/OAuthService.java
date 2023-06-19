@@ -1,12 +1,26 @@
 package com.spade.oauth.service;
 
-import com.spade.oauth.context.OAuthPathContext;
-import com.spade.oauth.dto.model.param.ParamForAccessToken;
+import com.spade.oauth.dto.param.ParamForAccessToken;
+
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 /**
- * OAuth 토큰 요청 Request(feign) 공통 인터페이스
+ * Request token 공통 인터페이스
  */
 public interface OAuthService {
 
-    String requestForAuthorizeTokenCreate(ParamForAccessToken param, String url);
+    public String requestForAuthorizeTokenCreate(ParamForAccessToken param);
+
+    void setOAuthClient();
+
+    String createAuthorizeUrl();
+
+    /** state 랜덤 생성 */
+    default String createRandomState() {
+        SecureRandom random = new SecureRandom();
+        String state = new BigInteger(130, random).toString();
+
+        return state;
+    }
 }

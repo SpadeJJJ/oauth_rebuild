@@ -1,7 +1,7 @@
-com.spade.oauth.config.OAuthAutoConfiguration
-com.spade.oauth.config.RedisAutoConfigurationCustom
-com.spade.oauth.config.RedisRepositoriesAutoConfigurationCustom
-com.spade.oauth.config.RedisServiceAutoConfiguration
-com.spade.oauth.config.StateAutoConfiguration
-com.spade.oauth.config.FilterAutoConfiguration
-com.spade.oauth.config.ParamServiceAutoConfiguration
+com.spade.oauth.autoconfig.OAuthAutoConfiguration
+com.spade.oauth.autoconfig.RedisAutoConfigurationCustom
+com.spade.oauth.autoconfig.RedisRepositoriesAutoConfigurationCustom
+com.spade.oauth.autoconfig.RedisServiceAutoConfiguration
+com.spade.oauth.autoconfig.StateAutoConfiguration
+com.spade.oauth.autoconfig.FilterAutoConfiguration
+com.spade.oauth.autoconfig.ParamServiceAutoConfiguration

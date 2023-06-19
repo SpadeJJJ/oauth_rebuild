@@ -1,6 +1,6 @@
 package com.spade.oauth.event;
 
-import com.spade.oauth.dto.model.OAuthResultToken;
+import com.spade.oauth.dto.OAuthResultToken;
 
 /**
  * OAuth 인증 요청 결과 Listener 공통 인터페이스

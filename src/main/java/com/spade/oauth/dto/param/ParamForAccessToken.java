@@ -1,4 +1,4 @@
-package com.spade.oauth.dto.model.param;
+package com.spade.oauth.dto.param;
 
 import feign.form.FormProperty;
 import lombok.Getter;
