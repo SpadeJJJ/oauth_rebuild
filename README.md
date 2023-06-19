@@ -11,18 +11,38 @@ Backend에서 해당 library를 통해서 Kakao, Naver 등 기업의 Login API�
 * FE : frontend
 * TS : Target Server (kakao, naver 등)
 * UR : User
-***
 
+***
 ```mermaid
 sequenceDiagram
 UR ->> FE : 로그인 요청
 FE ->> TS : 로그인 정보 확인
 TS ->> BE : CallBack url 호출
 BE ->> TS : Filter에서 callback 확인 및 access token 요청
-TS ->> BE : token 요청 결과 publish.
+TS ->> BE : token 요청 결과 return
+BE ->> Be : token 요청 결과 publish
 
 ```
+***
 
+## Spring 흐름도
+* OAuthServiceFilter : callback url 및 access token 요청용 filter
+* OAuthTokenServiceFactory : access token 요청을 처리하는 service들을 관리.
+* OAuthService : access token을 직접 요청하는 service.
+
+***
+```mermaid
+sequenceDiagram
+TS ->> OAuthServiceFilter : call back url 호출
+OAuthServiceFilter ->> OAuthTokenServiceFactory : requestToken(String type, ParamForCallBack param) 호출
+OAuthTokenServiceFactory ->> OAuthService : requestForAuthorizeTokenCreate(ParamForAccessToken param) 호출
+OAuthService ->> TS : requestAccessTokenCreate(ParamForAccessToken param) 호출 (token 생성 요청)
+TS ->> OAuthService : 생성 결과 반환
+OAuthService ->> OAuthTokenServiceFactory : 생성 결과 반환
+OAuthTokenServiceFactory ->> OAuthServiceFilter : 생성 결과 반환
+OAuthServiceFilter ->> OAuthServiceFilter : 생성 결과 publish.
+
+```
 ***
 
 ## 서비스 정보 등록
