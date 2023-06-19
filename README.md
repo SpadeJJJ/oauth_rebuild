@@ -48,14 +48,13 @@ FE가 따로 있는 경우에는 State를 LB에서 처리하지 않음.
 ## 서비스 정보 등록
 * 설정 위치 : resources/config
 * 형식 : *.properties
-
-설정 정보
-oauth2.authorize-info.naver.request-token-url=https://nid.naver.com/oauth2.0/token
-oauth2.authorize-info.naver.client-id=UMKT4dIs6FAj23xkYaC1
-oauth2.authorize-info.naver.secret-key=fwBz2BIrLy
-oauth2.authorize-info.naver.call-back-uri=/naver/callback
-oauth2.authorize-info.naver.call-back-host=http://localhost:8080
-oauth2.authorize-info.naver.grant-type=authorization_code
-oauth2.authorize-info.naver.authorize-url=https://nid.naver.com/oauth2.0/authorize
+* property 입력 형식
+토큰 생성 요청 url : oauth2.authorize-info.{기업}.request-token-url=https://nid.naver.com/oauth2.0/token
+Client_id : oauth2.authorize-info.{기업}.client-id=UMKT4dIs6FAj23xkYaC1
+Secret_key : oauth2.authorize-info.{기업}.secret-key=fwBz2BIrLy
+Redirect_url : oauth2.authorize-info.{기업}.call-back-uri=/naver/callback
+Redirect_url의 Host : oauth2.authorize-info.{기업}.call-back-host=http://localhost:8080
+Grant-Type param 정보 : oauth2.authorize-info.{기업}.grant-type=authorization_code
+Authorize 요청 url : oauth2.authorize-info.{기업}.authorize-url=https://nid.naver.com/oauth2.0/authorize
 
 
