@@ -5,6 +5,7 @@ import com.spade.oauth.dto.param.ParamForAccessToken;
 import com.spade.oauth.exception.AuthorizeFailureException;
 import com.spade.oauth.feign.client.OAuthNaverClient;
 import com.spade.oauth.property.NaverOAuthProperty;
+import com.spade.oauth.property.OAuthProperty;
 import com.spade.oauth.service.OAuthService;
 import feign.Feign;
 import feign.codec.Encoder;
@@ -21,10 +22,10 @@ import org.springframework.web.util.UriComponentsBuilder;
  * todo
  * 이것도 공통이므로 CommonOAuthService으로 kakao, naver 통합 예정
  */
-@Service("naverService")
+//@Service("naverService")
 @RequiredArgsConstructor
-@DependsOn(value = {"naverOAuthProperty", "encoder"})
-public class NaverOAuthService implements OAuthService {
+//@DependsOn(value = {"encoder"})
+public class NaverOAuthService  {
 
     /** Spring Encoder */
     private final Encoder encoder;
@@ -44,8 +45,7 @@ public class NaverOAuthService implements OAuthService {
     }
 
     /** OAuth token 생성 요청  */
-    @Override
-    public String requestForAuthorizeTokenCreate(ParamForAccessToken param) {
+    public String requestAccessToken(ParamForAccessToken param) {
         String result = null;
 
         result = oAuthNaverClient.requestAccessTokenCreate(param);
@@ -58,16 +58,19 @@ public class NaverOAuthService implements OAuthService {
     }
 
     /** authorize 요청 url 생성*/
-    @Override
     public String createAuthorizeUrl() {
         UriComponents url = UriComponentsBuilder.newInstance()
                                                 .path(naverOAuthProperty.getAuthorizeUrl())
                                                 .queryParam("response_type", "code")
                                                 .queryParam("client_id", naverOAuthProperty.getClientId())
                                                 .queryParam("redirect_uri", naverOAuthProperty.getCallBackHost()+naverOAuthProperty.getCallBackUri())
-                                                .queryParam("state", createRandomState())
+                                                .queryParam("state", "d")
                                                 .build();
 
         return url.toString();
+    }
+
+    public NaverOAuthProperty getoAuthProperty() {
+        return this.naverOAuthProperty;
     }
 }

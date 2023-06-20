@@ -9,6 +9,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Request token 요청용 kakao client
+ *
+ * 확인 후 삭제 예정
  */
 public interface OAuthKakaoClient {
     @RequestMapping(method = POST, consumes = APPLICATION_FORM_URLENCODED_VALUE)

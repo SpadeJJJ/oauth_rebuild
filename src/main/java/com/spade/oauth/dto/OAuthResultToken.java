@@ -18,7 +18,7 @@ public class OAuthResultToken {
 
     private String result;
 
-    private String callbackUrl;
+    private String type;
 
     private String param;
 }

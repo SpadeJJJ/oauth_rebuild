@@ -20,7 +20,7 @@ public class OAuthResultEventHandlerImpl implements OAuthResultEventHandler {
         System.out.println("=====================================================");
         System.out.println("Event Listener sub");
         System.out.println(token.getResult());
-        System.out.println(token.getCallbackUrl());
+        System.out.println(token.getType());
         System.out.println(token.getParam());
         System.out.println("=====================================================");
     }

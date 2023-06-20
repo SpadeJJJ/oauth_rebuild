@@ -1,6 +1,7 @@
 package com.spade.oauth.service;
 
 import com.spade.oauth.dto.param.ParamForAccessToken;
+import com.spade.oauth.property.OAuthProperty;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -10,11 +11,11 @@ import java.security.SecureRandom;
  */
 public interface OAuthService {
 
-    public String requestForAuthorizeTokenCreate(ParamForAccessToken param);
+    public String requestAccessToken(ParamForAccessToken param);
 
-    void setOAuthClient();
+//    void setOAuthClient();
 
-    String createAuthorizeUrl();
+//    String createAuthorizeUrl();
 
     /** state 랜덤 생성 */
     default String createRandomState() {

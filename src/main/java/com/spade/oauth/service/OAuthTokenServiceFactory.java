@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * token 요청을 처리하는 서비스를 관리.
+ *
+ * 삭제 예정
  */
 @Service
 @RequiredArgsConstructor
@@ -47,7 +49,7 @@ public class OAuthTokenServiceFactory {
             ParamCreateUtil.createAccessTokenParam(type, accessTokenParam, oAuthPathContext);
 
             /** 토큰 생성 요청 */
-            result = service.requestForAuthorizeTokenCreate(accessTokenParam);
+            result = service.requestAccessToken(accessTokenParam);
         } catch (AuthorizeFailureException e) {
             return e.getMessage();
         } catch (NoSuchBeanDefinitionException e) {

@@ -7,8 +7,6 @@ import lombok.Setter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -17,11 +15,13 @@ import java.util.regex.Pattern;
 /**
  * OAuthPath 관리 클래스
  * oAuthPathMap : /naver/callback(등록한 callback url), naver (기업명) 형식
+ *
+ * 삭제 예정
  */
 @RequiredArgsConstructor
 @Configuration
 @Setter
-@DependsOn(value = {"propertiesResourceConfig"})
+@DependsOn(value = {"propertiesResourceLoader"})
 public class OAuthPathContext {
 
     /** properties : oauth2.authorize-info.naver.host-url, https://kauth.kakao.com/oauth 형식으로 모든 properties의 key-value 관리 */

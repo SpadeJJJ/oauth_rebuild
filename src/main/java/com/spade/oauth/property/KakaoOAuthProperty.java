@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * Kakao 관련 property 관리 클래스
+ * 삭제 예정
  */
-@ConfigurationProperties(prefix = "oauth2.authorize-info.kakao")
-@Component
+//@ConfigurationProperties(prefix = "oauth2.authorize-info.kakao")
+//@Component
 @Getter
 @Setter
 public class KakaoOAuthProperty {

@@ -5,6 +5,8 @@ import com.spade.oauth.exception.AuthorizeFailureException;
 import com.spade.oauth.feign.client.OAuthKakaoClient;
 import com.spade.oauth.feign.client.OAuthNaverClient;
 import com.spade.oauth.property.KakaoOAuthProperty;
+import com.spade.oauth.property.NaverOAuthProperty;
+import com.spade.oauth.property.OAuthProperty;
 import com.spade.oauth.service.OAuthService;
 
 import feign.Feign;
@@ -19,9 +21,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 /**
  * Request token 처리 서비스
  */
-@Service("kakaoService")
+//@Service("kakaoService")
 @RequiredArgsConstructor
-public class KakaoOAuthService implements OAuthService {
+public class KakaoOAuthService {
 
     /** Spring Encoder */
     private final Encoder encoder;
@@ -42,8 +44,7 @@ public class KakaoOAuthService implements OAuthService {
     }
 
     /** OAuth token 생성 요청  */
-    @Override
-    public String requestForAuthorizeTokenCreate(ParamForAccessToken param) {
+    public String requestAccessToken(ParamForAccessToken param) {
         String result = null;
 
         result = oAuthKakaoClient.requestAccessTokenCreate(param);
@@ -55,16 +56,18 @@ public class KakaoOAuthService implements OAuthService {
     }
 
     /** authorize 요청 url 생성*/
-    @Override
     public String createAuthorizeUrl() {
         UriComponents uri = UriComponentsBuilder.newInstance()
                                                 .path(kakaoOAuthProperty.getAuthorizeUrl())
                                                 .queryParam("response_type", "code")
                                                 .queryParam("client_id", kakaoOAuthProperty.getClientId())
                                                 .queryParam("redirect_uri", kakaoOAuthProperty.getCallBackHost()+kakaoOAuthProperty.getCallBackUri())
-                                                .queryParam("state", createRandomState())
+                                                .queryParam("state", "d")
                                                 .build();
 
         return uri.toString();
+    }
+    public OAuthProperty getoAuthProperty() {
+        return new OAuthProperty();
     }
 }

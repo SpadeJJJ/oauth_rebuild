@@ -5,16 +5,9 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-/**
- * Naver 관련 property 관리 클래스
- *
- * 삭제 예정
- */
-//@ConfigurationProperties(prefix = "oauth2.authorize-info.naver")
-//@Component
 @Getter
 @Setter
-public class NaverOAuthProperty {
+public class OAuthProperty {
     private String callBackUri;
     private String requestTokenUrl;
     private String clientId;

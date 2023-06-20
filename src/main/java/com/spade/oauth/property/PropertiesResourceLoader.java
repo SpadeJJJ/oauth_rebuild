@@ -1,5 +1,6 @@
 package com.spade.oauth.property;
 
+import com.spade.oauth.OAuthCorporationType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
@@ -21,11 +22,12 @@ import java.util.Properties;
  */
 @Configuration
 @RequiredArgsConstructor
-public class PropertiesResourceConfig {
+public class PropertiesResourceLoader {
 
     private final StandardServletEnvironment standardServletEnvironment;
 
-    /** property를 @Source로 등록 */
+    /** property를 @Source로 등록
+     * 이거 삭제 예정*/
     @Bean(name = "properties")
     public PropertiesFactoryBean propertiesFactoryBean() throws IOException {
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
@@ -54,8 +56,9 @@ public class PropertiesResourceConfig {
         String[] filesName = file.list();
 
         for (String name : filesName) {
+            String typeName = name.replace(".properties", "");
+            OAuthCorporationType.valueOf(typeName.toUpperCase()).setIsLoad(true);
             Properties properties = new Properties();
-            System.out.println(name);
             Resource resource = new ClassPathResource("/config/"+name);
             PropertiesLoaderUtils.fillProperties(properties, resource);
             standardServletEnvironment.getPropertySources().addLast(new PropertiesPropertySource(name, properties));

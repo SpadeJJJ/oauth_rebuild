@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  * CallBack의 param(State, Code 등) 매핑 유틸
+ * 삭제 예정
  */
 public class ParamMapUtil {
 
